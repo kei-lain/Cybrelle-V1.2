@@ -1,0 +1,229 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue:400");
+
+:root {
+  --black: #000000;
+  --snuff: #e5d5ef;
+  --white: #ffffff;
+  --font-size-m: 36px;
+  --font-family-bebas_neue: "Bebas Neue", Helvetica;
+}
+
+.products {
+  align-items: flex-start;
+  background-color: #e5d5efb2;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1390px;
+  overflow: hidden;
+  width: 1440px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.product-container {
+  height: 829px;
+  margin-left: 32px;
+  margin-top: 61px;
+  position: relative;
+  width: 950px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  height: 829px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 950px;
+}
+
+.cybrelle-is-a-vulner {
+  height: 634px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 90px;
+  width: 856px;
+}
+
+.bebasneue-normal-black-36px {
+  color: var(--black);
+  font-family: var(--font-family-bebas_neue);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.cybrelle {
+  height: 78px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -96px;
+  margin-top: 96px;
+  transform: rotate(-90deg);
+  width: 270px;
+}
+
+.products {
+  left: 280px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 30px;
+  width: 464px;
+}
+
+.footer {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 252px;
+  min-width: 1444px;
+}
+
+.overlap-group-footer {
+  height: 76px;
+  position: relative;
+  width: 1440px;
+}
+
+.bebasneue-normal-white-36px {
+  color: var(--white);
+  font-family: var(--font-family-bebas_neue);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.social-m-edia {
+  left: 985px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 14px;
+  width: 224px;
+}
+
+.contact-us {
+  left: 1189px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 13px;
+  width: 196px;
+}
+
+.rectangle-4 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 65px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.top-bar {
+  align-items: flex-end;
+  display: flex;
+  height: 222px;
+  margin-top: -69px;
+  min-width: 1450px;
+}
+
+.overlap-group1 {
+  height: 153px;
+  position: relative;
+  width: 1440px;
+}
+
+.bebasneue-normal-snuff-36px {
+  color: var(--snuff);
+  font-family: var(--font-family-bebas_neue);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.about-us {
+  left: 1048px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 19px;
+  width: 130px;
+}
+
+.title {
+  left: 736px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 19px;
+  width: 130px;
+}
+
+.login {
+  left: 1204px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 19px;
+  width: 130px;
+}
+
+.place {
+  left: 1310px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 19px;
+  width: 130px;
+}
+
+.overlap-group-overlap-group1 {
+  height: 153px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.rectangle-1 {
+  background-color: var(--black);
+  border-radius: 10px;
+  height: 59px;
+  left: 0;
+  position: absolute;
+  top: 6px;
+  width: 1440px;
+}
+
+.cybrelle-logo4-1 {
+  height: 153px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 185px;
+}
+
+.articles {
+  left: 892px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 19px;
+  width: 130px;
+}

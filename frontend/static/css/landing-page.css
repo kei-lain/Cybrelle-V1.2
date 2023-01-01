@@ -1,0 +1,303 @@
+/* screen - landing-page */
+
+.landing-page {
+  background-color: var(--snuff-2);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 1390px;
+  min-width: 1440px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.landing-page .navbar {
+  align-items: flex-start;
+  display: flex;
+  margin-top: -81px;
+  min-width: 1440px;
+}
+
+.landing-page .overlap-group2 {
+  height: 222px;
+  position: relative;
+  width: 1450px;
+}
+
+.landing-page .rectangle-1 {
+  background-color: var(--black);
+  border-radius: 10px;
+  height: 59px;
+  left: 0;
+  position: absolute;
+  top: 82px;
+  width: 1440px;
+}
+
+.landing-page .navbar-items {
+  align-items: center;
+  display: flex;
+  height: 222px;
+  left: 0;
+  min-width: 1450px;
+  position: absolute;
+  top: 0;
+}
+
+.landing-page .cybrelle-logo4-1-navbar-items {
+  align-self: flex-end;
+  cursor: pointer;
+  height: 141px;
+  object-fit: cover;
+  transition: all 0.2s ease;
+  width: 185px;
+}
+
+.landing-page .cybrelle-logo4-1-navbar-items:hover {
+  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+}
+
+.landing-page .title {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 551px;
+  min-height: 46px;
+  width: 130px;
+}
+
+.landing-page .navbar-items-item {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 26px;
+  min-height: 46px;
+  width: 130px;
+}
+
+.landing-page .overlap-group-navbar-items {
+  height: 46px;
+  margin-left: 26px;
+  position: relative;
+  width: 236px;
+}
+
+.landing-page .login {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  width: 130px;
+}
+
+.landing-page .place {
+  left: 106px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  width: 130px;
+}
+
+.landing-page .info-landing-page {
+  align-items: center;
+  display: flex;
+  margin-left: 28px;
+  margin-top: 84px;
+  min-width: 1412px;
+}
+
+.landing-page .overlap-group-container {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28.0px;
+  min-height: 384px;
+  width: 782px;
+}
+
+.landing-page .cybrelle-container {
+  height: 315px;
+  position: relative;
+  width: 782px;
+}
+
+.landing-page .with-cybrelle-you-c {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  width: 782px;
+}
+
+.landing-page .cybrelle-is-an-autom {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 130px;
+  width: 772px;
+}
+
+.landing-page .overlap-group1 {
+  height: 69px;
+  margin-right: 10px;
+  position: relative;
+  width: 327px;
+}
+
+.landing-page .rectangle-3 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 69px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 278px;
+}
+
+.landing-page .learn-more {
+  left: 63px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 16px;
+  width: 264px;
+}
+
+.landing-page .cybrelle-logo5-1 {
+  height: 644px;
+  object-fit: cover;
+  width: 630px;
+}
+
+.landing-page .footer {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 426px;
+  width: auto;
+}
+
+.landing-page .overlap-group-footer {
+  height: 76px;
+  position: fixed;
+  width: auto;
+  bottom: 0px;
+
+}
+
+.landing-page .rectangle-4 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 65px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.landing-page .contact-us {
+  left: 1189px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 13px;
+  width: 196px;
+}
+
+.landing-page .social-m-edia {
+  left: 985px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 14px;
+  width: 224px;
+}
+
+.articles-3 {
+  align-self: center;
+  color: var(--black);
+  font-family: var(--font-family-bebas_neue);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 352px;
+  margin-top: 91px;
+  min-height: 52px;
+  width: 464px;
+}
+
+.article-1-1 {
+  background-color: var(--black);
+  border-radius: 20px;
+  display: flex;
+  height: 160px;
+  margin-left: 84px;
+  margin-top: 93px;
+  width: 901px;
+}
+
+.article-info {
+  display: flex;
+  flex-direction: column;
+  height: 128px;
+  margin-left: 41px;
+  width: 813px;
+}
+
+.article-information {
+  height: 88px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 809px;
+}
+
+.rectangle-4 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 65px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.cybrelle-is-a-vulner {
+  height: 634px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 90px;
+  width: 856px;
+}
+
+
+.cybrelle {
+  height: 78px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -96px;
+  margin-top: 96px;
+  transform: rotate(-90deg);
+  width: 270px;
+}
+
+.cybrelles-mission-i {
+  height: 408px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 60px;
+  margin-top: 92px;
+  width: 938px;
+}
+
+.about-us-about {
+  height: 52px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 312px;
+  margin-top: 92px;
+  width: 464px;
+}
+

@@ -1,0 +1,57 @@
+/* screen - about */
+
+.about {
+  align-items: flex-start;
+  background-color: var(--snuff-2);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1390px;
+  overflow: hidden;
+  width: 1440px;
+}
+
+.about .overlap-group3 {
+  height: 234px;
+  margin-top: -69px;
+  position: relative;
+  width: 1471px;
+}
+
+.about .overlap-group1 {
+  height: 44px;
+  position: relative;
+  width: 224px;
+}
+
+.about .overlap-group-navbar-items {
+  height: 44px;
+  position: relative;
+  width: 209px;
+}
+
+.about .about-us {
+  align-self: center;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 352.0px;
+  margin-top: 79px;
+  min-height: 52px;
+  width: 464px;
+}
+
+.about .cybrelles-mission-i {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 60px;
+  margin-top: 92px;
+  min-height: 408px;
+  width: 938px;
+}
+
+.about .footer {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 499px;
+  min-width: 1444px;
+}
