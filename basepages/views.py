@@ -18,6 +18,9 @@ class products_test(ListView):
 
 class articles_test(TemplateView):
     template_name = 'articles.html'
+
+
+
 class products_list(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()

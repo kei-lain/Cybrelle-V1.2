@@ -1,0 +1,401 @@
+/* screen - dashboard */
+
+.dashboard {
+  background-color: var(--snuff-2);
+  border: 1px none;
+  height: 1913px;
+  overflow: hidden;
+  position: relative;
+  width: 1469px;
+}
+
+.dashboard .sidebar {
+  align-items: flex-start;
+  display: flex;
+  height: 2175px;
+  justify-content: flex-end;
+  left: -106px;
+  min-width: 301px;
+  position: absolute;
+  top: -72px;
+}
+
+.dashboard .overlap-group1 {
+  height: 1985px;
+  position: relative;
+  width: 205px;
+}
+
+.dashboard .rectangle-16 {
+  height: 1913px;
+  left: 0;
+  position: absolute;
+  top: 72px;
+  width: 195px;
+}
+
+.dashboard .sidebar-items {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  left: 0;
+  min-height: 522px;
+  position: absolute;
+  top: 0;
+  width: 205px;
+}
+
+.dashboard .overlap-group {
+  align-self: flex-start;
+  height: 150px;
+  margin-top: 72px;
+  position: relative;
+  width: 195px;
+}
+
+.dashboard .place {
+  left: 10px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 109px;
+  width: 185px;
+}
+
+.dashboard .cybrelle-logo4-1 {
+  height: 150px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 185px;
+}
+
+.dashboard .sidebar-items-item {
+  letter-spacing: 0;
+  line-height: normal;
+  min-height: 41px;
+  width: 185px;
+}
+
+.dashboard .hosts-box {
+  background-color: var(--white);
+  border-radius: 20px;
+  display: flex;
+  height: 294px;
+  left: 235px;
+  position: absolute;
+  top: 57px;
+  width: 1184px;
+}
+
+.dashboard .hosts-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 232px;
+  margin-left: 22px;
+  margin-top: 24px;
+  width: 360px;
+}
+
+.dashboard .hosts {
+  height: 48px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 234px;
+}
+
+.dashboard .ip-addresses {
+  display: flex;
+  flex-direction: column;
+  height: 176px;
+  width: 358px;
+}
+
+.dashboard .ip-and-host1 {
+  display: flex;
+  gap: 62px;
+  height: 36px;
+  width: 362px;
+}
+
+.dashboard .phone-1 {
+  height: 34px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 2px;
+  width: 148px;
+}
+
+.dashboard .dns {
+  height: 34px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 148px;
+}
+
+.dashboard .ip-and-host2 {
+  display: flex;
+  gap: 32px;
+  height: 38px;
+  margin-top: 31px;
+  width: 362px;
+}
+
+.dashboard .phone-2 {
+  height: 34px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 178px;
+}
+
+.dashboard .router {
+  height: 34px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 4px;
+  width: 148px;
+}
+
+.dashboard .ip-and-host3 {
+  display: flex;
+  gap: 32px;
+  height: 36px;
+  margin-top: 35px;
+  width: 362px;
+}
+
+.dashboard .phone-3 {
+  height: 34px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 2px;
+  width: 178px;
+}
+
+.dashboard .web-server {
+  height: 34px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 148px;
+}
+
+.dashboard .overlap-group5 {
+  height: 1244px;
+  left: 233px;
+  position: absolute;
+  top: 401px;
+  width: 1454px;
+}
+
+.dashboard .cv-es-and-exploits-box {
+  background-color: var(--white);
+  border-radius: 20px;
+  display: flex;
+  height: 308px;
+  left: 645px;
+  position: absolute;
+  top: 0;
+  width: 574px;
+}
+
+.dashboard .cve-and-exploits {
+  display: flex;
+  flex-direction: column;
+  height: 262px;
+  margin-left: 9px;
+  margin-top: 28px;
+  width: 498px;
+}
+
+.dashboard .cv-es-and-exploits {
+  height: 60px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 236px;
+}
+
+.dashboard .hosts-cv-es {
+  display: flex;
+  gap: 54px;
+  width: 496px;
+}
+
+.dashboard .hosts-cv-es-item {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  height: 202px;
+  width: 224px;
+}
+
+.dashboard .phone-4 {
+  height: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 218px;
+}
+
+.dashboard .phone-5 {
+  height: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 218px;
+}
+
+.dashboard .phone-6 {
+  height: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 218px;
+}
+
+.dashboard .cve-2005-19763 {
+  height: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 218px;
+}
+
+.dashboard .cve-2022-1904 {
+  height: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 218px;
+}
+
+.dashboard .cve-2019-1888 {
+  height: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 218px;
+}
+
+.dashboard .overlap-group-container {
+  height: 1244px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1454px;
+}
+
+.dashboard .overlap-group2 {
+  height: 466px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 574px;
+}
+
+.dashboard .rectangle-21 {
+  background-color: var(--white);
+  border-radius: 20px;
+  height: 308px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 574px;
+}
+
+.dashboard .vulnerability-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 446px;
+  left: 26px;
+  position: absolute;
+  top: 20px;
+  width: 480px;
+}
+
+.dashboard .about-exploit-cve-2005-19763 {
+  height: 76px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 370px;
+}
+
+.dashboard .information-about-th {
+  height: 360px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: 476px;
+}
+
+.dashboard .overlap-group3 {
+  height: 886px;
+  left: 0;
+  position: absolute;
+  top: 358px;
+  width: 1450px;
+}
+
+.dashboard .rectangle-23 {
+  background-color: var(--white);
+  border-radius: 20px;
+  height: 886px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1192px;
+}
+
+.dashboard .how-to-fix-exploit-cve-2005-19763 {
+  left: 374px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 38px;
+  width: 1076px;
+}
+
+.dashboard .information-regardin {
+  left: 138px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 134px;
+  width: 967px;
+}
+
+.dashboard .scrollbar-frame-1 {
+  display: flex;
+  height: 11px;
+  left: 0;
+  position: fixed;
+  top: 1902px;
+  width: 1469px;
+}
+
+.dashboard .scrollbar-1 {
+  background-color: #00000080;
+  border: 1px solid;
+  border-color: #ffffff25;
+  border-radius: 3.5px;
+  height: 9px;
+  margin-left: 100px;
+  margin-top: 1px;
+  width: 1368px;
+}
+
+.dashboard .scrollbar-frame-2 {
+  display: flex;
+  height: 1913px;
+  left: 1458px;
+  position: fixed;
+  top: 0;
+  width: 11px;
+}
+
+.dashboard .scrollbar-2 {
+  background-color: #00000080;
+  border: 1px solid;
+  border-color: #ffffff25;
+  border-radius: 3.5px;
+  height: 1320px;
+  margin-left: 1px;
+  margin-top: 69px;
+  width: 9px;
+}

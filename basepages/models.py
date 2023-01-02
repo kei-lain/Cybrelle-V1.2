@@ -7,4 +7,6 @@ class Product(models.Model):
     product_description = models.TextField(blank= False)
     def __str__(self):
         return self.product_name
+
+
         

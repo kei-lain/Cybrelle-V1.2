@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--<meta name=description content="This site was generated with Anima. www.animaapp.com"/>-->
+    <!-- <link rel="shortcut icon" type=image/png href="https://animaproject.s3.amazonaws.com/home/favicon.png" /> -->
+    <meta name="viewport" content="width=1469, maximum-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard-styleguide.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard-globals.css' %}" />
+  </head>
+  <title>{%block title%} Dashboard {% endblock %}</title>
+  <body style="margin: 0">
+    <input type="hidden" id="anPageName" name="page" value="dashboard" />
+    <div class="container-center-horizontal">
+      <div class="dashboard screen">
+        <div class="sidebar">
+          <div class="overlap-group1">
+            <img class="rectangle-16" src="{% static 'images/rectangle-16@1x.png' %}" alt="Rectangle 16" />
+            <div class="sidebar-items bebasneue-normal-white-36px">
+              <div class="overlap-group">
+                <h1 class="place bebasneue-normal-white-36px">
+                  <a href="{% url 'home' %}">Home</h1></a>
+                <img class="cybrelle-logo4-1" src="{% static 'images/cybrelle-logo-4--1@2x.png' %}" alt="Cybrelle-logo(4) 1" />
+              </div>
+              <div class="sidebar-items-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+              </div>
+              <div class="sidebar-items-item">
+                <a href="{% url 'hosts-page' %}">Hosts</a>
+              </div>
+              <div class="sidebar-items-item">
+                <a href="{% url 'accounts-page' %}">Account</a>
+              </div>
+              <div class="sidebar-items-item">
+                <a href="{% url 'organization-admin'%}">Admin</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>{% block content %}{% endblock %}</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
