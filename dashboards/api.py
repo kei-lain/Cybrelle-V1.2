@@ -49,11 +49,11 @@ def cves(request,host_id: int):
     for result in scan_results:
         try:
             new_cve = CVE.objects.create(host=host_obj, user=user, Organization=organization, cves=result)
-            
+            new_cve.save()
         except IntegrityError:
         # Handle the integrity error
             return(print('Error: null value in column "cves"'))
-        return new_cve
+    return new_cve
 
 
     

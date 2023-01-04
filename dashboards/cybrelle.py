@@ -42,8 +42,7 @@ def Scanner(address, username, password):
         systemInfo.append(process)
     netVulns = getVulnerability(addressInfo)
     programvulns = getProgramVulnerability(kernel, systemInfo)
-    V.append(netVulns)
-    V.append(programvulns)
+    V= netVulns + programvulns
     return((V)) 
          
 
@@ -55,6 +54,7 @@ def getVulnerability(addressInfo):
             query = addressInfo[i-1:i]
         else:
             query = addressInfo[i]
+        
         CVEs = nvdlib.searchCVE(keywordSearch= query, limit=4, key=apiKey, delay=.6)
         # CVEs = crawler.get_main_page(query)
         # for eachCVE in CVEs:
@@ -63,13 +63,12 @@ def getVulnerability(addressInfo):
         #     else:
         #         continue
         
-        
+        print(query)
         for eachCVE in CVEs:
             if eachCVE.score[2] != 'LOW':
                 print(eachCVE.id)
                 netVulns.append(eachCVE.id)
-        for vuln in netVulns:
-            return(vuln)
+        return(netVulns)
             
 
 def getProgramVulnerability(kernel,systemInfo):
@@ -80,8 +79,8 @@ def getProgramVulnerability(kernel,systemInfo):
     
     for i in range(0, len(systemInfo)):
         program = systemInfo[i][0]
-        query = (f'{program}')
-        # print(query)
+        query = (program)
+        print(query,kernel)
     
     
         # CVEs = nvdlib.searchCVE(keywordSearch = query , limit = 4, key = apiKey, delay=.6)
@@ -92,8 +91,7 @@ def getProgramVulnerability(kernel,systemInfo):
             if eachCVE.score[2] != 'LOW':
                 vulns.append(eachCVE.id)
                 print(eachCVE.id)
-    for vuln in vulns:
-        return(vuln)
+    return(vulns)
        
    
 
@@ -104,7 +102,7 @@ def remoteExecution(address, username, password):
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(address, port=22, username=username, password=password)
     getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
-    getOS = "uname -r"
+    getOS = "uname"
     stdin, stdout, stderr = client.exec_command(getProcesses)
 
     p = (line.split("\n") for line in stdout.readlines())
@@ -114,9 +112,13 @@ def remoteExecution(address, username, password):
             continue
         else:
             processes.append(eachProcess)
+    
     stdin,stdout, stderr = client.exec_command(getOS)
-    for kernel in stdout.readlines():
-        kernel = kernel 
+    
+    for line in stdout.readlines():
+        kernel = line.split("/n") 
+
+
         
 
     return(processes, kernel)  
