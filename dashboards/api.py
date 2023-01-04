@@ -56,6 +56,8 @@ def cves(request,host_id: int):
     return new_cve
 
 
+
+
     
     
 
