@@ -6,8 +6,9 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib import admin
 from .cybrelle import Scanner , execute
-from .models import Host, CVE
-from .schema import HostSchema , CVESchema, NotFoundSchema
+from .openai_integration import getCVEFix
+from .models import Host, CVE, Instructions
+from .schema import HostSchema , CVESchema, NotFoundSchema , InstructionsSchema
 
 
 
@@ -54,6 +55,19 @@ def cves(request,host_id: int):
         # Handle the integrity error
             return(print('Error: null value in column "cves"'))
     return new_cve
+
+@api.api_operation(["POST","GET"], "instructions/{cve_id}",  response={201: InstructionsSchema})
+def instructions(request, cve_id: int):
+    cve = CVE.objects.filter(pk=cve_id)
+    cve_obj = get_object_or_404(CVE, pk=cve_id)
+    cve_for_prompt = cve_obj.cves
+    instruction = getCVEFix(cve=cve_for_prompt)
+    new_instructions = Instructions.objects.create(cve=cve_obj , instruction=(instruction))
+    new_instructions.save()
+    return(new_instructions)
+
+
+
 
 
 
