@@ -1,4 +1,5 @@
-from ninja import Schema
+from ninja import Schema, ModelSchema
+from .models import CVE
 
 
 class HostSchema(Schema):
@@ -14,6 +15,7 @@ class NotFoundSchema(Schema):
     message: str
 
 
-class CVESchema(Schema):
-    host: HostSchema
-    cves: str
+class CVESchema(ModelSchema):
+    class Config:
+        model = CVE
+        model_fields = '__all__'

@@ -5,7 +5,6 @@ import dotenv
 from mitrecve import crawler
 import nvdlib
 import getpass
-import concurrent.futures
 
 dotenv.load_dotenv()
 
@@ -16,6 +15,7 @@ apiKey = os.getenv('API_KEY')
 def Scanner(address, username, password):
     addressInfo = []
     systemInfo = []
+    V = []
     hostname = socket.getfqdn(address)
     # addressInfo.append(hostname)
 
@@ -40,8 +40,12 @@ def Scanner(address, username, password):
     processes , kernel  = remoteExecution(address, username, password)
     for process in processes:
         systemInfo.append(process)
-    getVulnerability(addressInfo) 
-    getProgramVulnerability(kernel, systemInfo)      
+    netVulns = getVulnerability(addressInfo)
+    programvulns = getProgramVulnerability(kernel, systemInfo)
+    V.append(netVulns)
+    V.append(programvulns)
+    return((V)) 
+         
 
 def getVulnerability(addressInfo):
     
@@ -51,14 +55,22 @@ def getVulnerability(addressInfo):
             query = addressInfo[i-1:i]
         else:
             query = addressInfo[i]
-
-        CVEs = nvdlib.searchCVE(keywordSearch= query , limit = 4 ,key = apiKey, delay=.6)
+        CVEs = nvdlib.searchCVE(keywordSearch= query, limit=4, key=apiKey, delay=.6)
+        # CVEs = crawler.get_main_page(query)
+        # for eachCVE in CVEs:
+        #     if eachCVE.score[2] != 'LOW':
+        #         netVulns.append(eachCVE.id)
+        #     else:
+        #         continue
+        
+        
         for eachCVE in CVEs:
             if eachCVE.score[2] != 'LOW':
+                print(eachCVE.id)
                 netVulns.append(eachCVE.id)
-            else:
-                continue
-        return(print(netVulns))
+        for vuln in netVulns:
+            return(vuln)
+            
 
 def getProgramVulnerability(kernel,systemInfo):
     vulns = []
@@ -72,24 +84,25 @@ def getProgramVulnerability(kernel,systemInfo):
         # print(query)
     
     
-        CVEs = nvdlib.searchCVE(keywordSearch = query , limit = 4, key = apiKey, delay=.6)
+        # CVEs = nvdlib.searchCVE(keywordSearch = query , limit = 4, key = apiKey, delay=.6)
+        CVEs = nvdlib.searchCVE(keywordSearch= query,  limit=4, key=apiKey , delay=.6)
+        # CVEs = crawler.get_main_page(query)
+        # while i < len(CVEs):
         for eachCVE in CVEs:
             if eachCVE.score[2] != 'LOW':
                 vulns.append(eachCVE.id)
-            else:
-                continue
-        programVulns[program] = vulns
-        
-    return(print(programVulns))  
+                print(eachCVE.id)
+    for vuln in vulns:
+        return(vuln)
+       
+   
 
 def remoteExecution(address, username, password):
     processes = []
     kernel = ''
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    user= username
-    passwd= password
-    client.connect(address, port=22, username=user, password=passwd)
+    client.connect(address, port=22, username=username, password=password)
     getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
     getOS = "uname -r"
     stdin, stdout, stderr = client.exec_command(getProcesses)
@@ -110,9 +123,14 @@ def remoteExecution(address, username, password):
 
 
 def execute(address, username, password):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        future = executor.submit(Scanner,address, username, password)
-        return(future.result())
+    threads = []
+    thread = threading.Thread(target=Scanner, args=(address, username, password, ))
+    thread.start()
+    threads.append(thread)
+
+    for thread in threads:
+        thread.join()
+    
 # if __name__ == '__main__':
 #     addresses = ['206.189.180.236']
 #     # for address in addresses:

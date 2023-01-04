@@ -56,6 +56,9 @@ INSTALLED_APPS = [
 
 ]
 
+
+
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -124,6 +127,12 @@ PASSWORD_HASHERS = [
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
 
 
 # Internationalization
