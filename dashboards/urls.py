@@ -5,7 +5,7 @@ from dashboards.models import Host
 from django.urls import path, include
 import concurrent.futures
 import itertools
-from .views import HostsPage, CybrelleDashboard, OrganizationAdmin, AccountInfo, gethosts, addCVES, getCVES
+from .views import HostsPage, CybrelleDashboard, OrganizationAdmin, AccountInfo
 from .cybrelle import Scanner
 from django.urls import  reverse_lazy
 from .api import api
