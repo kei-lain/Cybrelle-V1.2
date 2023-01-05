@@ -79,8 +79,10 @@ def getProgramVulnerability(kernel,systemInfo):
     
     for i in range(0, len(systemInfo)):
         program = systemInfo[i][0]
-        query = (program)
-        print(query,kernel)
+    
+        kernel = kernel[0].split("\n")
+        query = (kernel, program)
+        print(query)
     
     
         # CVEs = nvdlib.searchCVE(keywordSearch = query , limit = 4, key = apiKey, delay=.6)
