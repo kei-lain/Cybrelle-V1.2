@@ -20,6 +20,10 @@ class articles_test(TemplateView):
     template_name = 'articles.html'
 
 
+class pricingView(TemplateView):
+    template_name = 'pricing.html'
+
+
 
 class products_list(viewsets.ModelViewSet):
     serializer_class = ProductSerializer

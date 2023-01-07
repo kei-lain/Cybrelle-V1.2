@@ -1,0 +1,283 @@
+/* screen - new-landing-page */
+
+.new-landing-page {
+  background-color: var(--snuff);
+  border: 1px none;
+  display: flex;
+  height: 100vh;
+  min-height: 1024px;
+  min-width: 1440px;
+  width: 100%;
+}
+
+.new-landing-page .info-landing-page {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 230px;
+  margin-top: 232px;
+  min-width: 1210px;
+  z-index: 1;
+}
+
+.new-landing-page .overlap-group2 {
+  height: 638px;
+  position: relative;
+  width: 1210px;
+}
+
+.new-landing-page .cybrelle-container {
+  height: 417px;
+  left: 0;
+  position: absolute;
+  top: 15px;
+  width: 670px;
+}
+
+.new-landing-page .with-cybrelle-you-c {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  width: 670px;
+}
+
+.new-landing-page .cybrelle-is-an-autom {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 172px;
+  width: 662px;
+}
+
+.new-landing-page .overlap-group1 {
+  height: 91px;
+  left: 381px;
+  position: absolute;
+  top: 432px;
+  width: 280px;
+}
+
+.new-landing-page .rectangle-3 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 91px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 238px;
+}
+
+.new-landing-page .learn-more {
+  color: #e5d5ef;
+  font-family: var(--font-family-bebas_neue);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  left: 54px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 21px;
+  width: 226px;
+}
+
+.new-landing-page .cybrelle-logo5-1 {
+  height: 638px;
+  left: 558px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 652px;
+}
+
+.new-landing-page .sidebar {
+  align-items: flex-end;
+  display: flex;
+  height: calc(100.00% + 71px);
+  left: 0;
+  min-width: 210px;
+  position: fixed;
+  min-height: 100vh;
+  z-index: 2;
+}
+
+.new-landing-page .overlap-group3 {
+  height: 1024px;
+  position: relative;
+  width: 222px;
+}
+
+.new-landing-page .rectangle-1 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 1024px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 210px;
+}
+
+.new-landing-page .sidebar-items {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 9px;
+  min-height: 784px;
+  position: absolute;
+  top: 200px;
+  width: 213px;
+}
+
+.new-landing-page .our-products {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 3px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.new-landing-page .sidebar-items-item {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 3px;
+  margin-top: 22px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.new-landing-page .login {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 22px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.new-landing-page .contact-us {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 3px;
+  margin-top: 372px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.new-landing-page .cybrelle-logo4-1 {
+  height: 151px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 185px;
+}
+
+.about {
+  background-color: var(--snuff);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 1024px;
+  min-width: 1440px;
+  width: 100%;
+}
+
+.about .sidebar {
+  align-items: flex-start;
+  display: flex;
+  height: calc(100.00% + 71px);
+  left: 0;
+  min-width: 210px;
+  position: fixed;
+  top: -71px;
+  z-index: 3;
+}
+
+.about .overlap-group {
+  height: 1095px;
+  position: relative;
+  width: 222px;
+}
+
+.about .rectangle-1 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 1024px;
+  left: 0;
+  position: absolute;
+  top: 71px;
+  width: 210px;
+}
+
+.about .sidebar-items {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  min-height: 1055px;
+  position: absolute;
+  top: 0;
+  width: 222px;
+}
+
+.about .cybrelle-logo4-1 {
+  align-self: flex-start;
+  height: 151px;
+  margin-top: 71px;
+  object-fit: cover;
+  width: 185px;
+}
+
+.about .our-products {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 49px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.about .sidebar-items-item {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 22px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.about .login {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 6.0px;
+  margin-top: 22px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.about .contact-us {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 372px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.about .about-us {
+  height: 74px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 752px;
+  margin-top: 126px;
+  width: 411px;
+  z-index: 2;
+}
+
+.about .cybrelles-mission-i {
+  height: 408px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 388px;
+  margin-top: 51px;
+  width: 938px;
+  z-index: 1;
+}

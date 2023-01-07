@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     
 
 ]
-
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 

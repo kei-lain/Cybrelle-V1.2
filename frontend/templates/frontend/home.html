@@ -1,24 +1,23 @@
-{%extends 'base.html'%}
-{% block title %}Home{% endblock %}
-{% block content %}
-{% load static %}
-<<div class="info-landing-page">
-  <div class="overlap-group-container">
-    <div class="cybrelle-container bebasneue-normal-black-36px">
-      <p class="with-cybrelle-you-c">
-        With Cybrelle, you can stop worrying about potential threats and focus on growing your business.
-      </p>
-      <p class="cybrelle-is-an-autom">
-        Cybrelle is an automated Vulnerability triage and management solution that provides you with the exact
-        information you need to know about your network&#39;s vulnerabilities. All this with just a few clicks!
-      </p>
+{% extends 'index.html' %}
+{%block title %} Home {% endblock %}
+{% block content%}
+{%load static%}
+<section class="hero-heading-left wf-section">
+    <div class="w-row">
+      <div class="w-col w-col-6"><img src="images/Cybrelle-logo5.png" loading="lazy" alt="">
+        <h1 class="heading-4">Cybrelle is an automated Vulnerability triage and management solution that provides you with the exact information you need to know about your System&#x27;s Vulnerabilities with just a few Clicks!</h1>
+      </div>
+      <div class="w-col w-col-6">
+        <h1 class="heading-3">You Can Grow your business without worrying about your attack surface!</h1>
+      </div>
     </div>
-    <div class="overlap-group1">
-      <div class="rectangle-3"></div>
-      <div class="learn-more bebasneue-normal-snuff-36px">Learn More</div>
+    <div class="container-3">
+      <div class="hero-wrapper">
+        <div class="hero-split">
+          <a href="#" class="button-primary-2 w-button">Learn More</a>
+        </div>
+      </div>
     </div>
-  </div>
-  <img class="cybrelle-logo5-1" src="{% static 'images/cybrelle-logo-5--1@1x.png' %}" alt="Cybrelle-logo(5) 1" />
-</div>
+  </section>
 {% endblock %}
 

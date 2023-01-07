@@ -1,6 +1,10 @@
 from ninja import NinjaAPI
 from django.db import IntegrityError
+from django.forms.models import model_to_dict
+from asgiref.sync import sync_to_async
 import json
+import asyncio
+import threading
 from typing import List
 from django.conf import settings
 from django.shortcuts import get_object_or_404
@@ -8,15 +12,13 @@ from django.contrib import admin
 from .cybrelle import Scanner , execute
 from .openai_integration import getCVEFix
 from .models import Host, CVE, Instructions
+from django.core.serializers import serialize
 from .schema import HostSchema , CVESchema, NotFoundSchema , InstructionsSchema
 
 
 
 api = NinjaAPI()
 
-@api.get("hosts/",response=List[HostSchema])
-def hosts(request):
-    return Host.objects.all()
 
 @api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema})
 def host(request, host_id: int):
@@ -35,27 +37,44 @@ def create_host(request, host: HostSchema):
 def cves(request):
     return  CVE.objects.all()
 
+
 @api.api_operation(["POST","GET"], "cves/{host_id}", response={201:CVESchema})
-def cves(request,host_id: int):
+async def cves(request,host_id: int):
+    threads = []
     hosts = Host.objects.filter(pk=host_id)
-    host_obj = get_object_or_404(Host, pk=host_id)
-    host_for_cve = host_obj.hostname
-    user = host_obj.user
+    host_obj = await sync_to_async(get_object_or_404)(Host, pk=host_id)
+    # user =  sync_to_async(lambda: host_obj.user)
+    
     hostname = host_obj.hostname
-    organization = host_obj.organization
+    # organization = sync_to_async(lambda: host_obj.organization)
+   
     host_username = host_obj.host_username
     host_password = host_obj.host_password
     ip_address = host_obj.ip_address
-    scan_results = Scanner(ip_address, host_username, host_password)
-    for result in scan_results:
+    futures = asyncio.ensure_future(Scanner(ip_address, host_username, host_password))
+    for future in asyncio.as_completed([futures]):
+        result = await future
+        result = str(result)
         try:
-            new_cve = CVE.objects.create(host=host_obj, user=user, Organization=organization, cves=result)
-            new_cve.save()
+            new_cve= await sync_to_async(CVE.objects.create)(host=host_obj,cves=result)
+        
+            # await sync_to_async(new_cve.save())
         except IntegrityError:
         # Handle the integrity error
             return(print('Error: null value in column "cves"'))
     return new_cve
 
+
+@api.get("cves/get/{cve_id}" , response={200: CVESchema} )
+def getCVES(request, host_id : int):
+    cve = CVE.objects.get(cves=cve_id)
+
+    return  200, cve
+
+    # for cve in cves:
+    #     json_data = serialize('json', cve)
+    #     return json_data
+    
 @api.api_operation(["POST","GET"], "instructions/{cve_id}",  response={201: InstructionsSchema})
 def instructions(request, cve_id: int):
     cve = CVE.objects.filter(pk=cve_id)

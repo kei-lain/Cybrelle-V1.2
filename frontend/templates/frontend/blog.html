@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block title  %}Cybrelle's Blog{% endblock %}
+{% block content %}
+<section class="team-slider wf-section">
+    <div class="container-7">
+      <h2 class="centered-heading">Blog Posts</h2>
+      <div data-delay="4000" data-animation="slide" class="team-slider-wrapper w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="12" data-duration="500" data-infinite="true">
+        <div class="w-slider-mask">
+          <div class="team-slide-wrapper w-slide">
+            <div class="team-block"><img src="https://uploads-ssl.webflow.com/62434fa732124a0fb112aab4/62434fa732124af1aa12aadf_placeholder%201.svg" loading="lazy" alt="" class="team-member-image-two">
+              <div class="team-block-info">
+        {% for article in articles%}
+                <h3 class="team-member-name-two">{{ article.post_title}}</h3>
+                <p class="team-member-text">{{ article.post_body }}</p>
+                <a href="#" class="text-link-arrow w-inline-block">
+                  <div class="text-block">Read more</div>
+                  <div class="arrow-embed w-embed"><svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M11.72 15L16.3472 10.357C16.7732 9.92932 16.7732 9.23603 16.3472 8.80962L11.72 4.16667L10.1776 5.71508L12.9425 8.4889H4.16669V10.6774H12.9425L10.1776 13.4522L11.72 15Z" fill="currentColor"></path>
+                    </svg></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="team-slider-arrow w-slider-arrow-left">
+          <div class="w-icon-slider-left"></div>
+        </div>
+        <div class="team-slider-arrow w-slider-arrow-right">
+          <div class="w-icon-slider-right"></div>
+        </div>
+        <div class="team-slider-nav w-slider-nav w-slider-nav-invert w-round"></div>
+      </div>
+    </div>
+  </section>
+  <section class="footer-subscribe wf-section">
+    <div class="container-7">
+      <div class="footer-form-two w-form">
+        <form id="wf-form-Footer-Form-Two" name="wf-form-Footer-Form-Two" data-name="Footer Form Two" method="post" class="footer-form-container-two" action="{% url 'subscription' %}">
+          <div class="footer-form-title">Subscribe to our Newsletters</div>
+          <div class="footer-form-block-two"><input type="email" class="footer-form-input w-input" maxlength="256" name="Footer-Email-Two" data-name="Footer Email Two" aria-label="Enter your email" placeholder="Enter your email" id="Footer-Email-Two" required=""><input type="submit" value="Subscribe Now" data-wait="Please wait..." class="button-primary-4 footer-form-button w-button"></div>
+        </form>
+            {% if messages %}
+      {% for message in messages %}
+        <div class="my-5 alert alert-success">
+          <h5 class="m-0">
+              {{ message }}
+      </h5></div>
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+    </div>
+    
+</section>
+ {% endfor %}
+  {% endif %}
+
+{% endblock %}
+ 

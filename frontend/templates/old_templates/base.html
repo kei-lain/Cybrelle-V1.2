@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1440, maximum-scale=1.0" />
+    <meta name="og:type" content="website" />
+    <meta name="twitter:card" content="photo" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/new-landing-page.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleguide.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/globals.css' %}" />
+  </head>
+  <body style="margin: 0">
+    <div class="new-landing-page screen">
+      <div<{% block content %}{% endblock%}</div>
+      <div class="sidebar">
+        <div class="overlap-group3">
+          <div class="rectangle-1"></div>
+          <div class="sidebar-items bebasneue-normal-white-36px">
+            <div class="our-products"><a href="{% url 'products' %}">Our Products</a></div>
+            <div class="sidebar-items-item"><a href="{% url 'about' %}">About</a></div>
+            <div class="sidebar-items-item"><a href="{% url 'articles' %}">Articles</a></div>
+            <div class="login"><a href="{% url 'login'%}">Login</a></div>
+            <div class="sidebar-items-item"><a href="{% url 'register'%}">Register</a></div>
+            <div class="contact-us">Contact US</div>
+          </div>
+          <img class="cybrelle-logo4-1" src="{% static 'images/cybrelle-logo-4--1@2x.png' %}" alt="Cybrelle-logo(4) 1" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

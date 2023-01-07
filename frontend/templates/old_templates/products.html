@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title%} Cybrelle Products {% endblock %}
+{% block content%}
+<div class="product-container">
+  <div class="product-info">
+    {% for product in products %}
+    <div class="cybrelle bebasneue-normal-black-36px">{{product.product_name}}</div>
+    <p class="cybrelle-is-a-vulner bebasneue-normal-black-36px">
+      {{product.product_description}}
+    </p>
+    {% endfor %}
+  </div>
+  <div class="products bebasneue-normal-black-36px">Products</div>
+</div>
+{% endblock %}

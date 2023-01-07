@@ -14,7 +14,7 @@
 
 .landing-page .navbar {
   align-items: flex-start;
-  display: flex;
+  display: table;
   margin-top: -81px;
   min-width: 1440px;
 }
@@ -174,9 +174,10 @@
 
 .landing-page .footer {
   align-items: flex-start;
-  display: flex;
+  display: inline-block;
   margin-top: 426px;
   width: auto;
+  position: absolute;
 }
 
 .landing-page .overlap-group-footer {
@@ -299,5 +300,71 @@
   margin-left: 312px;
   margin-top: 92px;
   width: 464px;
+}
+
+.sign-up-newsletter {
+  align-items: flex-end;
+  display: flex;
+  gap: 44px;
+  height: 106px;
+  margin-left: 739px;
+  margin-top: 296px;
+  min-width: 588px;
+  z-index: 2;
+}
+
+.flex-col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 106px;
+  width: 368px;
+}
+
+.sign-up-for-the-newsletter {
+  letter-spacing: 0;
+  line-height: normal;
+  min-height: 56px;
+  width: 344px;
+}
+
+.overlap-group-flex-col {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  height: 50px;
+  min-width: 368px;
+  padding: 0 36px;
+}
+
+.your-email-here {
+  letter-spacing: 0;
+  line-height: normal;
+  min-height: 50px;
+  width: 286px;
+}
+
+.overlap-group1-sign-up-newsletter {
+  align-items: center;
+  background-color: var(--black);
+  border-radius: 20px;
+  display: flex;
+  height: 52px;
+  justify-content: flex-end;
+  min-width: 174px;
+}
+
+.submit {
+  letter-spacing: 0;
+  line-height: normal;
+  min-height: 36px;
+  width: 142px;
+}
+username-box {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 463px;
+  margin-top: 218px;
+  min-width: 516px;
 }
 

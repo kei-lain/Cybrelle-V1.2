@@ -5,6 +5,8 @@ import dotenv
 from mitrecve import crawler
 import nvdlib
 import getpass
+import asyncio , aiohttp
+
 
 dotenv.load_dotenv()
 
@@ -12,13 +14,8 @@ socket.setdefaulttimeout(5)
 apiKey = os.getenv('API_KEY')
 # addressInfo = []
 
-def Scanner(address, username, password):
+async def portScanner(address):
     addressInfo = []
-    systemInfo = []
-    V = []
-    hostname = socket.getfqdn(address)
-    # addressInfo.append(hostname)
-
     for port in range(1012):
       
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -35,18 +32,28 @@ def Scanner(address, username, password):
 
         else:
             pass
+    return(addressInfo)
 
-            
-    processes , kernel  = remoteExecution(address, username, password)
+async def Scanner(address, username, password):
+    addressInfo = []
+    systemInfo = []
+    V = []
+    hostname = socket.getfqdn(address)
+    # addressInfo.append(hostname)
+
+    addressInfo = (portScanner(address))
+    addressInfo = await addressInfo
+    await asyncio.sleep(0)
+
+    processes , kernel  = await remoteExecution(address, username, password)
     for process in processes:
         systemInfo.append(process)
-    netVulns = getVulnerability(addressInfo)
-    programvulns = getProgramVulnerability(kernel, systemInfo)
-    V= netVulns + programvulns
-    return((V)) 
+    netVulns = await getVulnerability(addressInfo)
+    programvulns = await getProgramVulnerability(kernel, systemInfo)
+    V =  netVulns + programvulns
+    return (V) 
          
-
-def getVulnerability(addressInfo):
+async def getVulnerability(addressInfo):
     
     netVulns = []
     for i in range(len(addressInfo)):
@@ -68,12 +75,11 @@ def getVulnerability(addressInfo):
             if eachCVE.score[2] != 'LOW':
                 print(eachCVE.id)
                 netVulns.append(eachCVE.id)
-        return(netVulns)
+    return(netVulns)
             
 
-def getProgramVulnerability(kernel,systemInfo):
+async def getProgramVulnerability(kernel,systemInfo):
     vulns = []
-    programVulns = {}
     program = ''
 
     
@@ -82,22 +88,25 @@ def getProgramVulnerability(kernel,systemInfo):
     
         kernel = kernel[0].split("\n")
         query = (kernel, program)
-        print(query)
+       
     
     
         # CVEs = nvdlib.searchCVE(keywordSearch = query , limit = 4, key = apiKey, delay=.6)
         CVEs = nvdlib.searchCVE(keywordSearch= query,  limit=4, key=apiKey , delay=.6)
         # CVEs = crawler.get_main_page(query)
-        # while i < len(CVEs):
+        # while i < len(CVEs)/:
+        print(query)
         for eachCVE in CVEs:
             if eachCVE.score[2] != 'LOW':
                 vulns.append(eachCVE.id)
-                print(eachCVE.id)
+            else:
+                pass
+            print(eachCVE.id)
     return(vulns)
        
    
 
-def remoteExecution(address, username, password):
+async def remoteExecution(address, username, password):
     processes = []
     kernel = ''
     client = paramiko.SSHClient()

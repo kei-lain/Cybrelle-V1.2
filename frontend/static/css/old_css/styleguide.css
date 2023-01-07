@@ -1,15 +1,14 @@
 :root { 
   --black: #000000;
-  --snuff: #e5d5ef;
-  --snuff-2: #e5d5efb2;
+  --snuff: #e5d5efb2;
   --white: #ffffff;
  
   --font-size-m: 36px;
  
   --font-family-bebas_neue: "Bebas Neue", Helvetica;
 }
-.bebasneue-normal-snuff-36px {
-  color: var(--snuff);
+.bebasneue-normal-white-36px {
+  color: var(--white);
   font-family: var(--font-family-bebas_neue);
   font-size: var(--font-size-m);
   font-style: normal;
@@ -18,14 +17,6 @@
 
 .bebasneue-normal-black-36px {
   color: var(--black);
-  font-family: var(--font-family-bebas_neue);
-  font-size: var(--font-size-m);
-  font-style: normal;
-  font-weight: 400;
-}
-
-.bebasneue-normal-white-36px {
-  color: var(--white);
   font-family: var(--font-family-bebas_neue);
   font-size: var(--font-size-m);
   font-style: normal;

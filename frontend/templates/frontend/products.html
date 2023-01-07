@@ -1,15 +1,41 @@
-{% extends 'base.html' %}
-{% block title%} Cybrelle Products {% endblock %}
-{% block content%}
-<div class="product-container">
-  <div class="product-info">
-    {% for product in products %}
-    <div class="cybrelle bebasneue-normal-black-36px">{{product.product_name}}</div>
-    <p class="cybrelle-is-a-vulner bebasneue-normal-black-36px">
-      {{product.product_description}}
-    </p>
-    {% endfor %}
-  </div>
-  <div class="products bebasneue-normal-black-36px">Products</div>
-</div>
-{% endblock %}
+{% extends 'index.html' %}
+{% block title %} Cybrelle's PRoducts {% endblock %}
+{% block content %} 
+ <section class="hero-without-image-2 wf-section">
+    <div class="container-7">
+      <div class="hero-wrapper-two-2">
+        <h1 class="heading-6">cybrelle</h1>
+        <p class="margin-bottom-24px-3">Cybrelle is a Vulnerability triage and management solution for small businesses. It helps reduce network&#x27;s attack surface, identify critical vulnerabilities, and make informed decisions on how to act on them. It easily allows the users the option to reduce the amount of vulnerabilities that your system is susceptible to.</p>
+        <a href="#" class="button-primary-4 w-button">Get Started</a>
+      </div>
+    </div>
+  </section>
+  <section class="features-list wf-section">
+    <div class="container-7">
+      <div class="features-wrapper-two">
+        <div class="features-left">
+          <h3 class="heading-8">Features section</h3>
+          <p class="features-paragraph">Here are some of the top features of Cybrelle</p>
+          <a href="#" class="text-link-arrow w-inline-block">
+            <div>Learn more</div>
+            <div class="arrow-embed w-embed"><svg width="17" height="17" viewbox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.13 8.5L6.87296 4.24291L5.87067 5.24379L9.129 8.5L5.87067 11.7555L6.87225 12.7571L11.13 8.5Z" fill="currentColor"></path>
+              </svg></div>
+          </a>
+        </div>
+        <ul role="list" class="features-right w-list-unstyled">
+          <li class="features-block-two">
+            <p class="paragraph-6">Uses AI in order to come up with practical ways to reduce the number of vulnerabilities</p>
+          </li>
+          <li class="features-block-two">
+            <p class="paragraph-7">Shows your System and network vulnerabilities for each Host you add</p>
+          </li>
+          <li class="features-block-two">
+            <p class="paragraph-8">Presents all information for each vulnerability in a format that is easy to understand</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+  

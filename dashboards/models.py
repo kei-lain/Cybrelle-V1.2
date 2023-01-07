@@ -10,13 +10,23 @@ class Host(models.Model):
     ip_address = models.GenericIPAddressField()
     host_username = models.CharField(max_length=60)
     host_password = models.CharField(max_length=60)
+
+    linux = 1
+
+    windows = 2
+
+    OSChoices = (linux, "Linux"),(windows,"Windows")
+
+    host_OS = models.PositiveSmallIntegerField(choices=OSChoices, blank=False, null=False)
+
+   
     def __str__(self):
         return self.hostname
     
 
 class CVE(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    Organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # Organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     host = models.ForeignKey(Host, on_delete=models.CASCADE)
     cves = models.TextField( blank=False, default='CVE-00000-00000')
     def __str__(self):

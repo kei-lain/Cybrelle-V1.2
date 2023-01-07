@@ -7,6 +7,7 @@ class HostSchema(Schema):
     ip_address: str
     host_username: str
     host_password: str
+    host_id: int
 
     def __str__(self):
         self.ip_address

@@ -1,0 +1,132 @@
+/* screen - our-products */
+
+.our-products {
+  align-items: flex-start;
+  background-color: var(--snuff);
+  border: 1px none;
+  display: flex;
+  gap: 134px;
+  height: 1024px;
+  width: 1440px;
+}
+
+.our-products .sidebar {
+  align-items: flex-start;
+  display: flex;
+  margin-top: -71px;
+  min-width: 210px;
+}
+
+.our-products .overlap-group {
+  height: 1095px;
+  position: relative;
+  width: 222px;
+}
+
+.our-products .rectangle-1 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 1024px;
+  left: 0;
+  position: absolute;
+  top: 71px;
+  width: 210px;
+}
+
+.our-products .sidebar-items {
+  display: flex;
+  flex-direction: column;
+  height: 1055px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 222px;
+}
+
+.our-products .cybrelle-logo4-1 {
+  height: 151px;
+  margin-top: 71px;
+  object-fit: cover;
+  width: 185px;
+}
+
+.our-products .our-products {
+  height: 54px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 12px;
+  margin-top: 49px;
+  width: 198px;
+}
+
+.our-products .sidebar-items-item {
+  height: 54px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 12px;
+  margin-top: 22px;
+  width: 198px;
+}
+
+.our-products .login {
+  height: 54px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 9px;
+  margin-top: 22px;
+  width: 198px;
+}
+
+.our-products .contact-us {
+  height: 54px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 12px;
+  margin-top: 372px;
+  width: 198px;
+}
+
+.our-products .product-container {
+  height: 829px;
+  margin-top: 90px;
+  position: relative;
+  width: 950px;
+}
+
+.our-products .product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  height: 829px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 950px;
+}
+
+.our-products .cybrelle {
+  height: 78px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -96px;
+  margin-top: 96px;
+  transform: rotate(-90deg);
+  width: 270px;
+}
+
+.our-products .cybrelle-is-a-vulner {
+  height: 634px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 90px;
+  width: 856px;
+}
+
+.our-products .products {
+  left: 376px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 60px;
+  width: 464px;
+}

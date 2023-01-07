@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('basepages.urls')),
     path('', include('django.contrib.auth.urls')),
     path('', include('dashboards.urls')),
+    path('subscription/', include('marketing.urls'),)
 
     
  

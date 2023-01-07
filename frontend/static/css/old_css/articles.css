@@ -1,0 +1,162 @@
+/* screen - articles */
+
+.articles {
+  align-items: flex-end;
+  background-color: var(--snuff);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1024px;
+  width: 1440px;
+}
+
+.articles .sidebar {
+  align-items: flex-start;
+  display: flex;
+  height: 1095px;
+  left: 0;
+  min-width: 210px;
+  position: fixed;
+  top: -71px;
+  z-index: 4;
+}
+
+.articles .overlap-group4 {
+  height: 1095px;
+  position: relative;
+  width: 222px;
+}
+
+.articles .rectangle-1 {
+  background-color: var(--black);
+  border-radius: 20px;
+  height: 1024px;
+  left: 0;
+  position: absolute;
+  top: 71px;
+  width: 210px;
+}
+
+.articles .sidebar-items {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  min-height: 1055px;
+  position: absolute;
+  top: 0;
+  width: 222px;
+}
+
+.articles .cybrelle-logo4-1 {
+  align-self: flex-start;
+  height: 151px;
+  margin-top: 71px;
+  object-fit: cover;
+  width: 185px;
+}
+
+.articles .our-products {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 49px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.articles .sidebar-items-item {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 22px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.articles .login {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 6.0px;
+  margin-top: 22px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.articles .contact-us {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: 372px;
+  min-height: 54px;
+  width: 198px;
+}
+
+.articles .articles {
+  align-self: center;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 284.0px;
+  margin-top: 63px;
+  min-height: 87px;
+  width: 372px;
+  z-index: 1;
+}
+
+.articles .overlap-group-container-1 {
+  align-items: flex-start;
+  display: flex;
+  gap: 82px;
+  margin-right: 58px;
+  margin-top: 34px;
+  min-width: 1118px;
+  z-index: 2;
+}
+
+.articles .overlap-group {
+  height: 328px;
+  position: relative;
+  width: 516px;
+}
+
+.articles .rectangle-4 {
+  background-color: var(--white);
+  height: 296px;
+  left: 4px;
+  position: absolute;
+  top: 32px;
+  width: 512px;
+}
+
+.articles .the-body-of-the-article-will-go-here {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 64px;
+  width: 516px;
+}
+
+.articles .article-1 {
+  left: 28px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  width: 308px;
+}
+
+.articles .overlap-group-container-2 {
+  align-items: flex-start;
+  display: flex;
+  gap: 86px;
+  height: 333px;
+  margin-right: 54px;
+  margin-top: 117px;
+  min-width: 1122px;
+  z-index: 3;
+}
+
+.articles .overlap-group3 {
+  align-self: flex-end;
+  height: 328px;
+  position: relative;
+  width: 516px;
+}
