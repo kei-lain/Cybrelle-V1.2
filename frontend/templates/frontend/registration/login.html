@@ -1,10 +1,11 @@
- {% extends 'index.html '%}
+ {% extends 'index.html'%}
  {% block title %} Login {% endblock %}
  {% block content %}
+ {% load crispy_forms_tags %}
  <div class="w-container">
     <div class="w-form">
-      <form id="email-form" name="email-form" data-name="Email Form" method="post"> {% csrf_token %}{{form|crispy}</form>
-      <p>Dont have an account? Create One Here<a href="{% url 'register'%} ">Sign up</a></p>
+      <form id="email-form" name="email-form" data-name="Email Form" method="post"> {% csrf_token %}{{form|crispy}}<p>Dont have an account? Create One Here<a href="{% url 'register'%} ">Sign up</a></p>
+        <button type="submit" class="Submit">Login</button></form>
     <div class="w-form-done">
       <div>Thank you! Your submission has been received!</div>
     </div>

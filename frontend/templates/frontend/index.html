@@ -49,11 +49,19 @@
                 <div class="nav-divider"></div>
               </li>
               <li>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav-link-accent-3">Logout</a>
+              </li>
+              <li class="mobile-margin-top-11">
+                <a href="{% url 'dashboard' %}" class="button-primary-5 w-button">Dashboard</a>
+              </li>
+              {% else %}
                 <a href="{% url 'login' %}" class="nav-link-accent-3">Login</a>
               </li>
               <li class="mobile-margin-top-11">
                 <a href="{% url 'register' %}" class="button-primary-5 w-button">Register</a>
               </li>
+              {% endif %}
             </ul>
           </nav>
           <div class="menu-button-2 w-nav-button">

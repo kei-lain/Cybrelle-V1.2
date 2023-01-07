@@ -21,14 +21,14 @@ pk = ''
 
 
 class HostsPage(LoginRequiredMixin,CreateView):
-    template_name = 'hostspage.html'
+    template_name = 'hosts.html'
     model = Host
     success_url = reverse_lazy('dashboard')
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host
     context_object_name = "Hosts"
-    template_name = 'cybrelle_dashboard.html'
+    template_name = 'dash.html'
 
     # def get_context_data(self,**kwargs):
     #     context = super().get_context_data(**kwargs)

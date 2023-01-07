@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 
 class customRegistrationView(CreateView):
-    template_name = 'registration.html'
+    template_name = 'registration/registration.html'
     form_class = RegistrationForm
     # fields =  '__all__'
     redirected_authenticated_user = True

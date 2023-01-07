@@ -1,5 +1,6 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Jan 06 2023 09:43:41 GMT+0000 (Coordinated Universal Time)  -->
+{% load static %}
 <html data-wf-page="63b78a85fd7a424a20f654c0" data-wf-site="63b75525e8db0272775910e0">
 <head>
   <meta charset="utf-8">
@@ -8,9 +9,9 @@
   <meta content="Dashboard" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
-  <link href="css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/cybrelle.webflow.css" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/normalize.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/webflow.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/cybrelle.webflow.css' %}" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Bebas Neue:regular"]  }});</script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
@@ -23,12 +24,12 @@
     <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-center-container-2 shadow-three w-nav">
       <div class="container-7">
         <div class="navbar-wrapper-three-2">
-          <a href="#" class="navbar-brand-three-2 w-nav-brand"><img src="images/Cybrelle-logo5.png" loading="lazy" width="171" alt=""></a>
+          <a href="#" class="navbar-brand-three-2 w-nav-brand"><img src="{% static 'images/Cybrelle-logo5.png' %}" loading="lazy" width="171" alt=""></a>
           <nav role="navigation" class="nav-menu-wrapper-three-2 w-nav-menu">
             <div class="nav-menu-three-2">
               <ul role="list" class="nav-menu-block-2 w-list-unstyled">
                 <li>
-                  <a href="#" class="nav-link-5">Dashboard</a>
+                  <a href="{% url 'dashboard' %}" class="nav-link-5">Dashboard</a>
                 </li>
                 <li>
                   <a href="#" class="nav-link-5">Hosts</a>
