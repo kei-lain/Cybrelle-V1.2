@@ -1,5 +1,5 @@
 from ninja import Schema, ModelSchema
-from .models import CVE , Instructions
+from .models import CVE , Report
 
 
 class HostSchema(Schema):
@@ -21,7 +21,8 @@ class CVESchema(ModelSchema):
         model = CVE
         model_fields = '__all__'
 
-class InstructionsSchema(ModelSchema):
+class ReportSchema(ModelSchema):
     class Config:
-        model = Instructions
+        model = Report
         model_fields = '__all__'
+    

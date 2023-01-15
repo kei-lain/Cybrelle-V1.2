@@ -3,7 +3,7 @@ import json
 import requests
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
-from .models import Host, CVE, Instructions
+from .models import Host, CVE, Report
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, PermissionRequiredMixin
 import zipp
@@ -41,20 +41,19 @@ class CybrelleDashboard(LoginRequiredMixin,ListView):
     #     return context
     
 
-    def get_CVES(self):
+    def get_CVES(self) :
         
         for host in Host.objects.count():
-            response = requests.get(f"http://127.0.0.1:8000/api/cves/{host}")
-            print(response)
+            response = requests.post(url)(f"http://127.0.0.1:8000/api/cves/{host}")
             CVEList = []
             CVEList.append(CVE.objects.all(host=host))
             print(CVEList)
         return CVEList
     
-    def get_Solution(self, cve_id):
-        response = request.get(f'http://127.0.0.1:8000/api/instructions/{cve_id}')
-        Instructions = response
-        return(Instructions)
+    # def get_Solution(self, cve_id):
+    #     response = request.get(f'http://127.0.0.1:8000/api/instructions/{cve_id}')
+    #     Instructions = response
+    #     return(Instructions)
 
 
         

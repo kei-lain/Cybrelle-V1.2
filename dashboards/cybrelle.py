@@ -1,17 +1,22 @@
 
-import socket, subprocess, threading, sys, shlex, os
+import socket, subprocess, threading, sys, shlex, os, platform
 import paramiko
 import dotenv
 from mitrecve import crawler
 import nvdlib
 import getpass
 import asyncio , aiohttp
+import openai , requests
+
+
 
 
 dotenv.load_dotenv()
 
 socket.setdefaulttimeout(5)
 apiKey = os.getenv('API_KEY')
+openai.api_key = os.getenv('OPEN-AI-API-KEY')
+api_endpoint = "https://api.openai.com/v1/completions"
 # addressInfo = []
 
 async def portScanner(address):
@@ -50,99 +55,220 @@ async def Scanner(address, username, password):
         systemInfo.append(process)
     netVulns = await getVulnerability(addressInfo)
     programvulns = await getProgramVulnerability(kernel, systemInfo)
-    V =  netVulns + programvulns
-    return (V) 
+    unitVulns= await systemdScanner(address, username, password)
+
+    V = unitVulns + netVulns + programvulns
+    
+    return(list(V)) 
          
 async def getVulnerability(addressInfo):
     
     netVulns = []
     for i in range(len(addressInfo)):
         if addressInfo[i] is not None:
-            query = addressInfo[i-1:i]
+            # query = addressInfo[i-1:i]
+            # query = (query)
+            query1 = (f'{addressInfo[i-1]}')
+            quer2 = (f'{addressInfo[i]}')
+            CVEs = crawler.get_main_page(query1 + query1)
         else:
             query = addressInfo[i]
+            CVEs = crawler.get_main_page(query)
         
-        CVEs = nvdlib.searchCVE(keywordSearch= query, limit=4, key=apiKey, delay=.6)
-        # CVEs = crawler.get_main_page(query)
+       
+        
+        # CVEs = nvdlib.searchCVE(keywordSearch= query, limit=4, key=apiKey, delay=.6)
         # for eachCVE in CVEs:
+        #     print(eachCVE.id)
+        #     netVulns.append(eachCVE)
+        for v in CVEs:
+            ID = CVEs[v]['ID']
+            
+            netVulns.append(ID)
+
         #     if eachCVE.score[2] != 'LOW':
         #         netVulns.append(eachCVE.id)
         #     else:
         #         continue
-        
-        print(query)
-        for eachCVE in CVEs:
-            if eachCVE.score[2] != 'LOW':
-                print(eachCVE.id)
-                netVulns.append(eachCVE.id)
+       
+       
     return(netVulns)
             
 
 async def getProgramVulnerability(kernel,systemInfo):
     vulns = []
     program = ''
+    kernel[0].split("\n")
+    print(kernel)
 
     
     for i in range(0, len(systemInfo)):
-        program = systemInfo[i][0]
-    
-        kernel = kernel[0].split("\n")
-        query = (kernel, program)
-       
+        program = systemInfo[i]
+        print(program)
+        query = []
+        
+        
+        # kernel = kernel.split("\n")
+        query1 = (f'{kernel}')
+        query2 = (f'{program}')
+        print(query1, query2)
     
     
         # CVEs = nvdlib.searchCVE(keywordSearch = query , limit = 4, key = apiKey, delay=.6)
-        CVEs = nvdlib.searchCVE(keywordSearch= query,  limit=4, key=apiKey , delay=.6)
-        # CVEs = crawler.get_main_page(query)
+        # CVEs = nvdlib.searchCVE(keywordSearch= query,  limit=4, key=apiKey , delay=.6)
+        CVEs = crawler.get_main_page(query1 + query2)
         # while i < len(CVEs)/:
         print(query)
-        for eachCVE in CVEs:
-            if eachCVE.score[2] != 'LOW':
-                vulns.append(eachCVE.id)
-            else:
-                pass
-            print(eachCVE.id)
+        for v in CVEs:
+            ID= (CVEs[v]['ID'])
+
+            vulns.append(ID)
+            print(ID)
+        
+        # for eachCVE in CVEs:
+        #     if eachCVE.score[2] != 'LOW':
+        #         vulns.append(eachCVE.id)
+        #     else:
+        #         pass
+
     return(vulns)
        
    
 
 async def remoteExecution(address, username, password):
-    processes = []
+    programs = []
     kernel = ''
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(address, port=22, username=username, password=password)
-    getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
-    getOS = "uname"
-    stdin, stdout, stderr = client.exec_command(getProcesses)
-
-    p = (line.split("\n") for line in stdout.readlines())
-
-    for eachProcess in p:
-        if 'COMMAND' in eachProcess:
-            continue
-        else:
-            processes.append(eachProcess)
+    # getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
+    getOperatingSysyem = ("uname")
+    stdin, stdout, stderr = client.exec_command(getOperatingSysyem)
     
-    stdin,stdout, stderr = client.exec_command(getOS)
+    operatingSystem = stdout.readline()
+    print(operatingSystem)
     
+       
+    
+    try:
+
+        getPrograms = ("rpm -qa | awk '{print $1}'")
+        stdin, stdout, stderr = client.exec_command(getPrograms)
+        print('Centos')
+    except:
+        pass
+    # try:
+    #     getPrograms = ("dpkg -l")
+    #     stdin, stdout, stderr = client.exec_command(getPrograms)
+    # except:
+    #     pass
+        
+    # try:
+    #     getPrograms = ("pacman -Q")
+    #     stdin, stdout, stderr = client.exec_command(getPrograms)
+    # except:
+    #     pass
+        
+    # try:
+    #     getPrograms = ("zypper search -i")
+    #     stdin, stdout, stderr = client.exec_command(getPrograms)
+    
+    # except:
+    #     print("Can't tell what distro this is ")
+
+
+
+        # try:
+           
+        #    getPrograms = ("Get-WMIObject -Query "SELECT * FROM Win32_Product" | FT")
+        #    stdin, stdout, stderr = client.exec_command(getPrograms)
+        # except:
+        #    print ("Cannot get the listg of programs for this windows machine")
+    for eachProgram in stdout.readlines():
+        print(eachProgram)
+        programs.append(eachProgram)
+    
+    getOS = ("uname")
+    stdin, stdout, stderr = client.exec_command(getOS)
+
     for line in stdout.readlines():
         kernel = line.split("/n") 
 
 
         
-
+    processes = programs
     return(processes, kernel)  
 
 
-def execute(address, username, password):
-    threads = []
-    thread = threading.Thread(target=Scanner, args=(address, username, password, ))
-    thread.start()
-    threads.append(thread)
 
-    for thread in threads:
-        thread.join()
+async def reportGen(address,username,password):
+    greatConfig = await readConfigs(address, username, password)  
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(address, port=22, username=username, password=password)
+    report = {}
+    for config in greatConfig:
+        print(config)
+        getContents = (f"cat {config}")
+        stdin, stdout, stderr = client.exec_command(getContents)
+        configInfo = stdout.readlines()
+        print(configInfo)
+
+
+        prompt = (f'Can you explain if {config} is secure. If not please generate a report explaining how to fix all the issues:  {configInfo}')
+        payload = {":"}
+        payload = {
+        "model": "text-davinci-003",
+        "prompt": prompt,
+        "max_tokens": 100,
+        "temperature": 0.5,
+        "top_p": 1,
+        "frequency_penalty": 0,
+        "presence_penalty": 0
+        }
+        response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
+        completed_text = response.json()
+        report[config] = completed_text
+    return(report)
+
+    
+async def systemdScanner(address,username,password):
+    units = []
+    unitVulns = []
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(address, port=22, username=username, password=password)
+    getUnits = ("systemctl list-unit-files --type=service --all | awk '{print $1}'")
+    stdin, stdout, stderr = client.exec_command(getUnits)
+    for eachUnit in stdout.readlines():
+        print(eachUnit)
+        units.append(eachUnit)
+    
+    for unit in units:
+        CVEs = crawler.get_main_page(unit)
+
+        for v in CVEs:
+            ID= (CVEs[v]['ID'])
+            print(ID)
+            unitVulns.append(ID)
+    
+    return(unitVulns)
+
+async def readConfigs(address, username, password):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(address, port=22, username=username, password=password)
+    listConfigs = (" sudo find / -name *.conf")
+    stdin, stdout, stderr = client.exec_command(listConfigs)
+    configs = stdout.readlines()
+    print(configs)
+
+    
+    
+    return(configs)
+
+
+
     
 # if __name__ == '__main__':
 #     addresses = ['206.189.180.236']

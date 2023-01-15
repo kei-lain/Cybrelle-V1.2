@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Host , CVE, Instructions
+from .models import Host , CVE, Report
 
 admin.site.register(Host)
 admin.site.register(CVE)
 # Register your models here.
-admin.site.register(Instructions)
+admin.site.register(Report)

@@ -12,7 +12,7 @@ openai.api_key = os.getenv('OPEN-AI-API-KEY')
 api_endpoint = "https://api.openai.com/v1/completions"
 
 def getCVEFix(cve):
-    prompt = (f'Can you explain how to fix {cve}')
+    prompt = (f'Can you explain how to fix {cve} if the issue is not patched. If the issue is passed please say so and dont explain.')
     payload = {":"}
     payload = {
     "model": "text-davinci-003",
@@ -28,6 +28,6 @@ def getCVEFix(cve):
     response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
 
     # Get the completed text from the response
-    completed_text = response.json()["choices"][0]["text"]
+    completed_text = response.json()
     return(completed_text)
     
