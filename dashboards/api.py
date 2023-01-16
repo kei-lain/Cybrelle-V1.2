@@ -74,8 +74,11 @@ async def cves(request,host_id: int):
             
            
             details = crawler.get_main_page(result)
-            for n in range(len(details)):
-                detail = details[n]['DESC']
+            if len(details) >= 1:
+                for n in range(len(details)):
+                    detail = details[n]['DESC']
+            else:
+                detail = None
             
             try:
                 print(result)
@@ -83,7 +86,7 @@ async def cves(request,host_id: int):
 
 
             except TimeoutError:
-                continue
+                return(TimeoutError())
 
             
                 # await sync_to_async(new_cve.save())

@@ -154,27 +154,34 @@ async def remoteExecution(address, username, password):
 
         getPrograms = ("rpm -qa | awk '{print $1}'")
         stdin, stdout, stderr = client.exec_command(getPrograms)
-        print('Centos')
+        if stdout:
+            print('Centos')
     except:
         pass
-    # try:
-    #     getPrograms = ("dpkg -l")
-    #     stdin, stdout, stderr = client.exec_command(getPrograms)
-    # except:
-    #     pass
+    try:
+        getPrograms = ("apt list --installed")
+        stdin, stdout, stderr = client.exec_command(getPrograms)
+        if stdout:
+            print("Ubuntu")
+    except:
+        pass
         
-    # try:
-    #     getPrograms = ("pacman -Q")
-    #     stdin, stdout, stderr = client.exec_command(getPrograms)
-    # except:
-    #     pass
+    try:
+        getPrograms = ("pacman -Q")
+        stdin, stdout, stderr = client.exec_command(getPrograms)
+        if stdout:
+            print("Arch-based")
+    except:
+        pass
         
-    # try:
-    #     getPrograms = ("zypper search -i")
-    #     stdin, stdout, stderr = client.exec_command(getPrograms)
+    try:
+        getPrograms = ("zypper search -i")
+        stdin, stdout, stderr = client.exec_command(getPrograms)
+        if stdout:
+            print("OpenSuse")
     
-    # except:
-    #     print("Can't tell what distro this is ")
+    except:
+        print("Can't tell what distro this is ")
 
 
 
@@ -218,9 +225,9 @@ async def reportGen(address,username,password):
         prompt = (f'Can you explain if {config} is secure. If not please generate a report explaining how to fix all the issues:  {configInfo}')
         payload = {":"}
         payload = {
-        "model": "text-davinci-003",
+        "model": "curie",
         "prompt": prompt,
-        "max_tokens": 100,
+        "max_tokens": 120,
         "temperature": 0.5,
         "top_p": 1,
         "frequency_penalty": 0,
