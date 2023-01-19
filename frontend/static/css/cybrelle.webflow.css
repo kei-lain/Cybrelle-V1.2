@@ -489,6 +489,31 @@
   text-align: center;
 }
 
+.hero-wrapper-two-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 750px;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+
 .margin-bottom-24px-2 {
   margin-right: 5px;
   margin-bottom: 24px;
@@ -500,7 +525,7 @@
   background-color: #1a1b1f;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  color: #fff;
+  color: #000;
   font-size: 12px;
   line-height: 20px;
   letter-spacing: 2px;
@@ -1800,6 +1825,13 @@
   background-color: #000;
 }
 
+.container-17 {
+  width: 100%;
+  max-width: 940px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .text-block-4 {
   position: static;
   background-color: transparent;
@@ -1912,6 +1944,7 @@
 .container-15 {
   border-radius: 20px;
   background-color: #fff;
+  color: #000;
 }
 
 .body-5 {
@@ -1960,6 +1993,7 @@
 
 .heading-12 {
   font-family: 'Mokoto glitch', sans-serif;
+  color: #000;
 }
 
 .heading-13 {
@@ -3135,7 +3169,7 @@
 
 @font-face {
   font-family: 'Mokoto glitch';
-  src: url('../fonts/Mokoto-Glitch.ttf') format('truetype');
+  src:  local("Mokoto-glitch"), url("fonts/Mokoto-Glitch.ttf") format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

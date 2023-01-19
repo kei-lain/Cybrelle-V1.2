@@ -5,7 +5,7 @@
  *    without disabling user zoom.
  */
 html {
-  font-family: sans-serif;
+  font-family: Mokoto-glitch;
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
@@ -353,3 +353,4 @@ td,
 th {
   padding: 0;
 }
+

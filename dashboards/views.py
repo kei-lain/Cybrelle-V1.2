@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from .forms import HostForm
 import json
 import requests
+from django.contrib.auth import get_user_model
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
+from django.http import HttpResponse ,HttpResponseForbidden ,HttpRequest
 from .models import Host, CVE, Report
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, PermissionRequiredMixin
 import zipp
 from django.urls import  reverse_lazy
@@ -12,7 +15,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from accounts.models import Organization
 from django.shortcuts import get_object_or_404
-
+from django.contrib import messages
 
 
 
@@ -20,35 +23,55 @@ from django.shortcuts import get_object_or_404
 pk = '' 
 
 
-class HostsPage(LoginRequiredMixin,CreateView):
-    template_name = 'hosts.html'
+class Hosts(LoginRequiredMixin,CreateView):
     model = Host
-    success_url = reverse_lazy('dashboard')
+    form = HostForm
+    fields = '__all__'
+    success_url = reverse_lazy('hosts')
+    template_name = 'hosts.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["hosts_list"] = Host.objects.filter(user=self.request.user) 
+        return context
+    
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host
     context_object_name = "Hosts"
-    template_name = 'dash.html'
+    template_name = 'dashboard-main.html'
+    # User =get_user_model()
+    # user = User.objects.all()
 
-    # def get_context_data(self,**kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["Hosts"] = Host.objects.all()
-        
-    #     context["CVES"]  = CVE.objects.all()
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Hosts"] = Host.objects.filter(user=self.request.user)
+        context["CVES"]  = CVE.objects.filter(host__user=self.request.user)
+        context["Report"] = Report.objects.filter(host__user=self.request.user)
     #     context["Instructions"] =  Instructions.objects.all()
-        
-
-    #     return context
+        return context
     
+class CVEView(LoginRequiredMixin, DetailView):
+    model = CVE
+    context_object_name = 'cve'
+    template_name = 'cve-info.html'
 
-    def get_CVES(self) :
+def getVulnerabilities(request, host_id):
+    response = requests.post(f"http://127.0.0.1:8000/api/cves/{host_id}")
+    try:
+        messages.success(response, 'Cybrelle has finished running. The page will now reload to show your vulnerabilities')
+        return(render(response, 'dashboard-main.html'))
+    except:
+        messages.success(request, "Something went wrong")
         
-        for host in Host.objects.count():
-            response = requests.post(url)(f"http://127.0.0.1:8000/api/cves/{host}")
-            CVEList = []
-            CVEList.append(CVE.objects.all(host=host))
-            print(CVEList)
-        return CVEList
+
+# def get_CVES(self) :
+    
+#     for host in Host.objects.count():
+#         response = requests.post(url)(f"http://127.0.0.1:8000/api/cves/{host}")
+#         if response.is_val
+#         print(CVEList)
+#     return CVEList
     
     # def get_Solution(self, cve_id):
     #     response = request.get(f'http://127.0.0.1:8000/api/instructions/{cve_id}')

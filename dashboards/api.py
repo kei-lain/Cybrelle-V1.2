@@ -12,7 +12,6 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib import admin
 from .cybrelle import Scanner , reportGen
-from .openai_integration import getCVEFix
 from .models import Host, CVE, Report
 from django.core.serializers import serialize
 from .schema import HostSchema , CVESchema, NotFoundSchema , ReportSchema
