@@ -2,11 +2,13 @@
 import socket, subprocess, threading, sys, shlex, os, platform
 import paramiko
 import dotenv
+import distro
 from mitrecve import crawler
 import nvdlib
 import getpass
 import asyncio , aiohttp
 import openai , requests
+from requests.exceptions import HTTPError
 
 
 
@@ -120,10 +122,12 @@ async def getProgramVulnerability(kernel,systemInfo):
         # while i < len(CVEs)/:
         print(query)
         for v in CVEs:
-            ID= (CVEs[v]['ID'])
+            if query2 in CVEs[v]['DESC']:
+                ID= (CVEs[v]['ID'])
+            
 
-            vulns.append(ID)
-            print(ID)
+                vulns.append(ID)
+                print(ID)
         
         # for eachCVE in CVEs:
         #     if eachCVE.score[2] != 'LOW':
@@ -142,7 +146,7 @@ async def remoteExecution(address, username, password):
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(address, port=22, username=username, password=password)
     # getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
-    getOperatingSysyem = ("uname")
+    getOperatingSysyem = ("lsb_release -is")
     stdin, stdout, stderr = client.exec_command(getOperatingSysyem)
     
     operatingSystem = stdout.readline()
@@ -150,38 +154,24 @@ async def remoteExecution(address, username, password):
     
        
     
-    try:
-
+    if operatingSystem.__contains__("CentOS") or operatingSystem.__contains__("Fedora") or operatingSystem.__contains__("Red Hat"):
         getPrograms = ("rpm -qa | awk '{print $1}'")
         stdin, stdout, stderr = client.exec_command(getPrograms)
-        if stdout:
-            print('Centos')
-    except:
-        pass
-    try:
+        print("Red Hat Based")
+    elif operatingSystem.__contains__('Ubuntu') or operatingSystem.__contains__('Debian'):
         getPrograms = ("apt list --installed")
         stdin, stdout, stderr = client.exec_command(getPrograms)
-        if stdout:
-            print("Ubuntu")
-    except:
-        pass
-        
-    try:
+        print("Debian based")
+    elif operatingSystem.__contains__('Arch'):
         getPrograms = ("pacman -Q")
         stdin, stdout, stderr = client.exec_command(getPrograms)
-        if stdout:
-            print("Arch-based")
-    except:
-        pass
-        
-    try:
+        print("Arch based")
+    else:
         getPrograms = ("zypper search -i")
         stdin, stdout, stderr = client.exec_command(getPrograms)
-        if stdout:
-            print("OpenSuse")
+        
     
-    except:
-        print("Can't tell what distro this is ")
+    
 
 
 
@@ -222,19 +212,18 @@ async def reportGen(address,username,password):
         print(configInfo)
 
 
-        prompt = (f'Can you explain if {config} is secure. If not please generate a report explaining how to fix all the issues:  {configInfo}')
-        payload = {":"}
-        payload = {
-        "model": "curie",
-        "prompt": prompt,
-        "max_tokens": 120,
-        "temperature": 0.5,
-        "top_p": 1,
-        "frequency_penalty": 0,
-        "presence_penalty": 0
-        }
-        response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
-        completed_text = response.json()
+        prompt = (f'Can you explain if {config} is secure. If not please summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is not important, please skip over.')
+        # response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
+        # completed_text = response.json()
+        try:
+            response = openai.Completion.create(engine = 'text-davinci-003', prompt= prompt , max_tokens = 3000, temperature = 0.5, top_p =1 , frequency_penalty=0, presence_penalty=0)
+        except:
+            pass
+        if 'choices' in response:
+            completed_text = response['choices'][0]['text']
+
+        else:
+            completed_text = response
         report[config] = completed_text
     return(report)
 
@@ -255,9 +244,10 @@ async def systemdScanner(address,username,password):
         CVEs = crawler.get_main_page(unit)
 
         for v in CVEs:
-            ID= (CVEs[v]['ID'])
-            print(ID)
-            unitVulns.append(ID)
+            if CVEs[v]['DESC'].__contains__(unit):
+                ID= (CVEs[v]['ID'])
+                print(ID)
+                unitVulns.append(ID)
     
     return(unitVulns)
 
@@ -265,7 +255,7 @@ async def readConfigs(address, username, password):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(address, port=22, username=username, password=password)
-    listConfigs = (" sudo find / -name *.conf")
+    listConfigs = ("sudo find /etc -name *.conf")
     stdin, stdout, stderr = client.exec_command(listConfigs)
     configs = stdout.readlines()
     print(configs)

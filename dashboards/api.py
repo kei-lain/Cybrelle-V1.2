@@ -1,4 +1,7 @@
 from ninja import NinjaAPI
+from ninja.responses import codes_2xx
+import pydantic
+from ninja.errors import HttpError , ValidationError, ConfigError
 from django.db import IntegrityError
 from django.forms.models import model_to_dict
 from asgiref.sync import sync_to_async
@@ -7,6 +10,7 @@ import asyncio
 import threading
 import nvdlib
 from mitrecve import crawler
+from ninja.pagination import paginate
 from typing import List
 from django.conf import settings
 from django.shortcuts import get_object_or_404
@@ -14,12 +18,15 @@ from django.contrib import admin
 from .cybrelle import Scanner , reportGen
 from .models import Host, CVE, Report
 from django.core.serializers import serialize
-from .schema import HostSchema , CVESchema, NotFoundSchema , ReportSchema
+from .schema import HostSchema , CVESchema, NotFoundSchema , ReportSchema, Error
 import dotenv, os
+import asyncio
 
 dotenv.load_dotenv(".env")
 apiKey = os.getenv('API_KEY')
 api = NinjaAPI()
+
+
 
 
 @api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema})
@@ -40,10 +47,12 @@ def cves(request):
     return  CVE.objects.all()
 
 
-@api.api_operation(["POST","GET"], "cves/{host_id}", response={201:CVESchema, 201:ReportSchema})
+@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error})
+
 async def cves(request,host_id: int):
     threads = []
     sections = []
+    new_cve = ''
     hosts = Host.objects.filter(pk=host_id)
     host_obj = await sync_to_async(get_object_or_404)(Host, pk=host_id)
     # user =  sync_to_async(lambda: host_obj.user)
@@ -56,13 +65,13 @@ async def cves(request,host_id: int):
     ip_address = host_obj.ip_address
     report = await (reportGen(ip_address, host_username, host_password))
     futures  = asyncio.ensure_future(Scanner(ip_address, host_username, host_password))
-    report = report
+    report = report  ##report generation works
     for key in report:
         section = report[key]
         sections.append(section)
 
     # futures = await asyncio.gather(Scanner(ip_address,host_username, host_password))
-    new_report = await sync_to_async(Report.objects.create)(host=host_obj, report=sections)
+    new_report = await sync_to_async(Report.objects.create)(host=host_obj, report=sections) 
     for future in asyncio.as_completed([futures]):
 
         results = await future
@@ -70,31 +79,43 @@ async def cves(request,host_id: int):
         
         for result in results:
             result = str(result)
-            
-           
-            details = crawler.get_main_page(result)
-            if len(details) >= 1:
-                for n in range(len(details)):
-                    detail = details[n]['DESC']
-            else:
-                detail = None
-            
+            print(result)
+        
             try:
-                print(result)
-                new_cve= await sync_to_async(CVE.objects.create)(host=host_obj,cves=result, info=detail)
+                details = (crawler.get_main_page(result))
+                if len(details) >= 1:
+                    detail = details[0]['DESC']
+                else:
+                    detail = result
+                
 
+                new_cve= await sync_to_async(CVE.objects.create)(host_id=host_obj.id,cves=str(result), info=detail)
+            
+            except ValidationError as e:
+                print(e)
+                
+            except ConfigError as e:
+                print(e)
+                
+
+            except pydantic.ValidationError as e:
+                print(e)
+                
 
             except TimeoutError:
-                return(TimeoutError())
-
+                print(TimeoutError())
+            except ValueError as e:
+                print(e)
+            
             
                 # await sync_to_async(new_cve.save())
             except IntegrityError:
             # Handle the integrity error
                 return(print('Error: null value in column "cves"'))
+            
     
    
-    return new_cve, new_report
+    return 201, new_cve, 
 
 
 @api.get("reports/{host_id}", response={200: ReportSchema})

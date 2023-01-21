@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import HostForm
 import json
 import requests
+import aiohttp
 from django.contrib.auth import get_user_model
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
@@ -57,12 +58,17 @@ class CVEView(LoginRequiredMixin, DetailView):
     template_name = 'cve-info.html'
 
 def getVulnerabilities(request, host_id):
-    response = requests.post(f"http://127.0.0.1:8000/api/cves/{host_id}")
-    try:
-        messages.success(response, 'Cybrelle has finished running. The page will now reload to show your vulnerabilities')
-        return(render(response, 'dashboard-main.html'))
-    except:
-        messages.success(request, "Something went wrong")
+   
+        response =  requests.post(f"http://127.0.0.1:8000/api/cves/{host_id}")
+        data = response
+        while data is not None:
+            return redirect('dashboard')
+
+        # try:
+        #     messages.success(response, 'Cybrelle has finished running. The page will now reload to show your vulnerabilities')
+        #     return(render(response, 'dashboard-main.html'))
+        # except:
+        #     messages.success(request, "Something went wrong")
         
 
 # def get_CVES(self) :

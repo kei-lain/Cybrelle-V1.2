@@ -24,6 +24,7 @@ class Host(models.Model):
     def __str__(self):
         return self.hostname
     
+    
 
 class CVE(models.Model):
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
