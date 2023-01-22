@@ -1,0 +1,15 @@
+{% extends 'dash.html'%}
+{% block title %} Report Page{% endblock %}
+{% block content%}
+  <div class="container-19 w-container"></div>
+  <section class="hero-without-image-4 wf-section">
+    <div class="container-18">
+      <div class="hero-wrapper-two-4">
+        <h1>Report for  {{Report.host}}</h1>
+        <p class="margin-bottom-24px-6">{{Report.report}}/p>
+        <a href="{% url 'dashboard'%}" class="button-primary-8 w-button">Back to Dashboard<br>‍</a>
+      </div>
+    </div>
+  </section>
+  <div class="w-container"></div>
+ {% endblock %}

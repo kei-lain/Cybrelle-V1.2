@@ -64,6 +64,12 @@ def getVulnerabilities(request, host_id):
         while data is not None:
             return redirect('dashboard')
 
+
+class ReportView(DetailView):
+    model = Report
+    context_object_name = 'Report'
+    template_name = 'repor-page.html'
+
         # try:
         #     messages.success(response, 'Cybrelle has finished running. The page will now reload to show your vulnerabilities')
         #     return(render(response, 'dashboard-main.html'))

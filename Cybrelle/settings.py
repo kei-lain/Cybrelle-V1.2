@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.core.mail',
     'crispy_forms',
     'django_filters',
     'crispy_bootstrap5',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'basepages',
     'frontend',
     'dashboards',
+    
     
     
 
@@ -102,7 +104,13 @@ DATABASES = {
     )
 }
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'admin@cybrelle.io'
+EMAIL_HOST_PASSWORD = 'dowF8@7i2iGY*x4|h'
+#
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

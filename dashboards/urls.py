@@ -5,7 +5,7 @@ from dashboards.models import Host
 from django.urls import path, include
 import concurrent.futures
 import itertools
-from .views import Hosts, CybrelleDashboard, OrganizationAdmin, AccountInfo, getVulnerabilities, CVEView
+from .views import Hosts, CybrelleDashboard, OrganizationAdmin, AccountInfo, getVulnerabilities, CVEView, ReportView
 from .cybrelle import Scanner
 from django.urls import  reverse_lazy
 from .api import api
@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts-page', AccountInfo.as_view(), name='accounts-page'),
     path('dashboard/<int:host_id>/', getVulnerabilities, name = 'dashboard'),
     path('cve/<int:pk>/', CVEView.as_view(), name = 'cve-info' ),
+    path('report/<int:pk>/', ReportView.as_view(), name='report')
     ]
