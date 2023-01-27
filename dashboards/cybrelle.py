@@ -12,6 +12,7 @@ from requests.exceptions import HTTPError
 
 
 
+socket.setdefaulttimeout(1)
 
 dotenv.load_dotenv()
 
@@ -23,7 +24,7 @@ api_endpoint = "https://api.openai.com/v1/completions"
 
 async def portScanner(address):
     addressInfo = []
-    for port in range(1012):
+    for port in range(65535):
       
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         check = sock.connect_ex((address,port))

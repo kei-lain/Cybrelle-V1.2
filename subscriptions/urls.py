@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Pricing, create_sub, complete, Checkout, cancel
+from .views import Pricing, create_sub, complete, Checkout, cancel, Profile
 
 urlpatterns = [
     # path('cancel/', CancelView.as_view(), name='cancel'),
@@ -11,6 +11,7 @@ urlpatterns = [
     path('create-sub/', create_sub, name='create-sub'),
     path('complete/', complete, name='complete'),
     path('cancel/', cancel , name='cancel'),
+    path('profile/', Profile.as_view(), name='profile'),
 
 
  

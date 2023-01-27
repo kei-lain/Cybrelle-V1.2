@@ -6,9 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, Permissi
 import stripe
 import djstripe
 from django.contrib.auth.decorators import login_required
-from djstripe.models import Product, Price, PaymentIntent, Subscription
+from djstripe.models import Product, Price, PaymentIntent, Subscription, Customer
 import json
-
+from .models import User
 from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt 
@@ -94,5 +94,15 @@ class Checkout(ListView):
 	context_object_name = 'products'
 
 	template_name = 'subscription/checkout.html'
+
+
+class Profile(TemplateView, LoginRequiredMixin):
+
+  template_name = 'subscription/profile.html'
+  def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active').exists()
+      return context
+  
 
 

@@ -17,7 +17,7 @@ from djstripe.models import Subscription
 from django.urls import  reverse_lazy
 from django.conf import settings
 from django.contrib.auth.models import User
-from accounts.models import Organization
+# from accounts.models import Organization
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from subscriptions.mixins import SubscriptionRequiredMixin
@@ -30,9 +30,10 @@ pk = ''
 
 
 class Hosts(LoginRequiredMixin,CreateView):
+  
     model = Host
-    form = HostForm
-    fields = '__all__'
+    fields = 'hostname','ip_address','host_username', 'host_password', 'host_OS'
+  
     success_url = reverse_lazy('hosts')
     template_name = 'hosts.html'
 
@@ -43,6 +44,11 @@ class Hosts(LoginRequiredMixin,CreateView):
         return context
     
     def form_valid(self, form):
+
+        form.instance.user = self.request.user
+       
+     
+        
         user_subscription = Subscription.objects.filter(customer__user=self.request.user, status='active').first()
         # Get the user's subscription plan
         subscription_plan = user_subscription.plan
@@ -62,6 +68,7 @@ class Hosts(LoginRequiredMixin,CreateView):
         else:
             form.instance.user = self.request.user
             return super().form_valid(form)
+   
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host
@@ -131,9 +138,9 @@ class ReportView(LoginRequiredMixin,DetailView):
     #     get_vulns_response = json.loads(get_vulns_response)
     #     return(render(request,get_vulns_response))
 
-class OrganizationAdmin(LoginRequiredMixin, ListView):
-    model = Organization
-    template_name = 'organization-admin.html'
+# class OrganizationAdmin(LoginRequiredMixin, ListView):
+#     model = Organization
+#     template_name = 'organization-admin.html'
 
 
 class AccountInfo(DetailView):

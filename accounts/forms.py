@@ -14,4 +14,9 @@ class RegistrationForm(UserCreationForm):
         model = get_user_model()
         fields = UserCreationForm.Meta.fields + ('organization_name','first_name', 'last_name', 'email' , 'username', 'password', 'birth_date')
     
-    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.organization = Organization.objects.create(name=self.cleaned_data['organization_name'])
+        if commit:
+            user.save()
+        return user
