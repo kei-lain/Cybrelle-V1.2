@@ -18,7 +18,7 @@ dotenv.load_dotenv()
 
 socket.setdefaulttimeout(5)
 apiKey = os.getenv('API_KEY')
-openai.api_key = os.getenv('OPEN-AI-API-KEY')
+openai.api_key = os.getenv('OPEN_AI_API_KEY')
 api_endpoint = "https://api.openai.com/v1/completions"
 # addressInfo = []
 
