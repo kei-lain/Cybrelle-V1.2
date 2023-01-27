@@ -22,3 +22,6 @@ class articles_test(TemplateView):
 
 class pricingView(TemplateView):
     template_name = 'pricing.html'
+
+class termsView(TemplateView):
+    template_name = 'terms.html'

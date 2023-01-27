@@ -4,8 +4,8 @@
 {%load static%}
 <section class="hero-heading-left wf-section">
     <div class="w-row">
-      <div class="w-col w-col-6"><img src="images/Cybrelle-logo5.png" loading="lazy" alt="">
-        <h1 class="heading-4">Cybrelle is an automated Vulnerability triage and management solution that provides you with the exact information you need to know about your System&#x27;s Vulnerabilities with just a few Clicks!</h1>
+      <div class="w-col w-col-6"><img src="{% static 'images/Cybrelle-logo5.png' %}" loading="lazy" alt="">
+        <h1 class="heading-4">Cybrelle is a cloud based vulnerability management program built using python and gpt-3. It's fast and easy to use, so you can quickly understand how to alleviate your vulnerabilities</h1>
       </div>
       <div class="w-col w-col-6">
         <h1 class="heading-3">You Can Grow your business without worrying about your attack surface!</h1>
@@ -14,7 +14,7 @@
     <div class="container-3">
       <div class="hero-wrapper">
         <div class="hero-split">
-          <a href="#" class="button-primary-2 w-button">Learn More</a>
+          <a href="{% url 'products'%}" class="button-primary-2 w-button">Learn More</a>
         </div>
       </div>
     </div>
