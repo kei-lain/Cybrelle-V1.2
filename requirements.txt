@@ -13,6 +13,7 @@ async-timeout==4.0.2
 attrs==22.2.0
 autocommand==2.2.2
 Automat==22.10.0
+autopep8==2.0.1
 bcrypt==4.0.1
 CacheControl==0.12.11
 certifi==2021.10.8
@@ -33,6 +34,7 @@ deluge==2.1.1
 distlib==0.3.6
 distro==1.8.0
 dj-database-url==1.0.0
+dj-stripe==2.7.3
 Django==3.2.8
 django-allauth==0.45.0
 django-cors-headers==3.10.0
@@ -67,6 +69,7 @@ iniconfig==1.1.1
 jaraco.context==4.2.0
 jaraco.functools==3.5.2
 jaraco.text==3.11.0
+jsonfield==3.1.0
 libevdev==0.11
 lxml==4.9.2
 Mako==1.2.4
@@ -102,6 +105,7 @@ py==1.11.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycairo==1.23.0
+pycodestyle==2.10.0
 pycparser==2.20
 pydantic==1.10.4
 pydantic-django==0.1.1
@@ -131,6 +135,7 @@ sniffio==1.3.0
 SQLAlchemy==1.4.45
 sqlparse==0.4.2
 starlette==0.22.0
+stripe==4.2.0
 style==1.1.0
 tenacity==8.1.0
 toml==0.10.2

@@ -2,9 +2,9 @@
 {% block title %} Registration {% endblock%}  
 {% block content %}
 {% load crispy_forms_tags %}
-  
+<script src="https://js.stripe.com/v3/"></script>
   <div class="w-container">
-    <form method="post">
+    <form method="post" >
       {% csrf_token %}{{form|crispy}}
       <p>Have an account? Login <a href="/login"> Here</a></p>
       <button type="submit" class="btn btn-success">Register</button>

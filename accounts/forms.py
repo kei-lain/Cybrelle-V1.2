@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 class RegistrationForm(UserCreationForm):
     organization_name = forms.CharField(max_length = 200, required=True, help_text='Organization Name')
@@ -10,7 +10,8 @@ class RegistrationForm(UserCreationForm):
     username = forms.CharField(max_length = 200, required=True, help_text='Username')
     password = forms.CharField(widget=forms.PasswordInput, min_length=14, max_length = 32 )
     birth_date = forms.DateField(required=True)
-    class Meta(UserCreationForm.Meta):
-        model = User
+    class Meta(UserCreationForm):
+        model = get_user_model()
         fields = UserCreationForm.Meta.fields + ('organization_name','first_name', 'last_name', 'email' , 'username', 'password', 'birth_date')
+    
     

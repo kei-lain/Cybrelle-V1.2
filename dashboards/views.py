@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.db import transaction
+from djstripe import webhooks
 from .forms import HostForm
 import json
 import requests
@@ -11,12 +13,15 @@ from .models import Host, CVE, Report
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, PermissionRequiredMixin
 import zipp
+from djstripe.models import Subscription
 from django.urls import  reverse_lazy
 from django.conf import settings
 from django.contrib.auth.models import User
 from accounts.models import Organization
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from subscriptions.mixins import SubscriptionRequiredMixin
+
 
 
 
@@ -33,9 +38,30 @@ class Hosts(LoginRequiredMixin,CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active').exists()
         context["hosts_list"] = Host.objects.filter(user=self.request.user) 
         return context
     
+    def form_valid(self, form):
+        user_subscription = Subscription.objects.filter(customer__user=self.request.user, status='active').first()
+        # Get the user's subscription plan
+        subscription_plan = user_subscription.plan
+        # Check the user's plan
+        if subscription_plan.id == "price_1MTSIRF8tUfTasHO9EmHLIT3" or subscription_plan.id == "price_1MUJ3NF8tUfTasHO0Hza5obs":
+            max_host = 5
+        elif subscription_plan.id == "price_1MTSJ6F8tUfTasHOmIrwEcEr" or subscription_plan.id == "price_1MUJ4BF8tUfTasHOO5nBD7TT":
+            max_host = 10
+        elif subscription_plan.id == "price_1MUJ4uF8tUfTasHO7olyH7GV" or subscription_plan.id == "price_1MTSMxF8tUfTasHOSg8bDYWy":
+            max_host = 20
+        else:
+            max_host = 5
+        # Get the number of host objects the user has already created
+        user_host_count = Host.objects.filter(user=self.request.user).count()
+        if user_host_count >= max_host:
+            return HttpResponse("You have reached the limit of host objects you can create with your subscription.")
+        else:
+            form.instance.user = self.request.user
+            return super().form_valid(form)
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host
@@ -46,6 +72,7 @@ class CybrelleDashboard(LoginRequiredMixin,ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active').exists()
         context["Hosts"] = Host.objects.filter(user=self.request.user)
         context["CVES"]  = CVE.objects.filter(host__user=self.request.user)
         context["Report"] = Report.objects.filter(host__user=self.request.user)
@@ -65,10 +92,13 @@ def getVulnerabilities(request, host_id):
             return redirect('dashboard')
 
 
-class ReportView(DetailView):
+class ReportView(LoginRequiredMixin,DetailView):
     model = Report
     context_object_name = 'Report'
     template_name = 'repor-page.html'
+
+
+
 
         # try:
         #     messages.success(response, 'Cybrelle has finished running. The page will now reload to show your vulnerabilities')

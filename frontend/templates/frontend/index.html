@@ -34,7 +34,7 @@
               </li>
               <li>
                 <a href="{% url 'articles'%}" class="nav-link-6">Blog</a>
-                <a href="#" class="nav-link-6">Pricing</a>
+                <a href="{% url 'pricing' %}" class="nav-link-6">Pricing</a>
               </li>
               <li>
                 <div data-hover="false" data-delay="0" class="nav-dropdown-2 w-dropdown">
@@ -80,9 +80,9 @@
         <div class="footer-content">
           <div id="w-node-_8feb5a3b-e663-55ba-f1c0-385b78fb5918-78fb5912" class="footer-block">
             <div class="title-small">CyBrelle</div>
-            <a href="#" class="footer-link">Our Products</a>
-            <a href="#" class="footer-link">Pricing</a>
-            <a href="#" class="footer-link">Login</a>
+            <a href="{%url 'products'%}" class="footer-link">Our Products</a>
+            <a href="{% url 'pricing'%}" class="footer-link">Pricing</a>
+            <a href="{% url 'login' %}" class="footer-link">Login</a>
           </div>
           <div id="w-node-_8feb5a3b-e663-55ba-f1c0-385b78fb5921-78fb5912" class="footer-block">
             <div class="title-small">Resources</div>

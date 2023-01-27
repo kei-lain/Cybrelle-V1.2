@@ -1,5 +1,9 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+
+
+
 
 class Industry(models.Model):
     category_name = models.CharField(max_length=240)
@@ -14,3 +18,4 @@ class Organization(models.Model):
     
     def __str__(self):
         return self.organization_name
+

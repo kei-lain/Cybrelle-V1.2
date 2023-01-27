@@ -2,6 +2,7 @@
 {% block title%} Hosts Page {% endblock%}
 {% block content%}
 {% load crispy_forms_tags %}
+{% if user_subscription or request.user.is_superuser %}
   <div class="w-container">
     <h1 class="heading-13">Hosts </h1>
   </div>
@@ -23,4 +24,7 @@
   </div>
     
   </div>
-{% endblock %}
+{%else%}
+<p><a href="{% url "checkout" %}">Please Check the Status of your Subscription</a></p>
+{% endif %}
+s{% endblock %}

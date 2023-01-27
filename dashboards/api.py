@@ -8,6 +8,7 @@ from asgiref.sync import sync_to_async
 import json
 import asyncio
 import threading
+import stripe
 import nvdlib
 from mitrecve import crawler
 from ninja.pagination import paginate
@@ -27,7 +28,7 @@ apiKey = os.getenv('API_KEY')
 api = NinjaAPI()
 
 
-
+stripe.api_key = settings.STRIPE_LIVE_SECRET_KEY
 
 @api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema})
 def host(request, host_id: int):
@@ -124,6 +125,7 @@ def reports(request, host_id: int):
     reports = Report.objects.all().filter(host=host)
 
     return 200, reports
+
 
 
 

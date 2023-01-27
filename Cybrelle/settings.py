@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_filters',
     'crispy_bootstrap5',
     'django_rename_app',
+    'djstripe',
     'accounts',
     'blog',
     'corsheaders',
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'basepages',
     'frontend',
     'dashboards',
+    'subscriptions',
     
     
     
@@ -60,7 +62,7 @@ INSTALLED_APPS = [
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-
+AUTH_USER_MODEL = 'subscriptions.User'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -92,6 +94,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Cybrelle.wsgi.application'
+
 
 
 # Database
@@ -137,12 +140,13 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ]
-}
 
+
+STRIPE_LIVE_PUBLIC_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_LIVE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_LIVE_MODE = True
+DJSTRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -163,6 +167,8 @@ STATIC_URL =  os.path.join(BASE_DIR, 'frontend/')
 
 LOGIN_REDIRECT_URL =  '/'
 
+
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Default primary key field type

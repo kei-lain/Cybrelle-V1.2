@@ -11,7 +11,7 @@ class customRegistrationView(CreateView):
     form_class = RegistrationForm
     # fields =  '__all__'
     redirected_authenticated_user = True
-    reverse_lazy =('/login')
-    success_url = '/login'
+    reverse_lazy =("/login")
+    success_url = ("/login")
     def get_object(self):
         return self.request.user

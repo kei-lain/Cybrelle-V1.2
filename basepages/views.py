@@ -22,9 +22,3 @@ class articles_test(TemplateView):
 
 class pricingView(TemplateView):
     template_name = 'pricing.html'
-
-
-
-class products_list(viewsets.ModelViewSet):
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
