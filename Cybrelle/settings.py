@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0','cybrelle.io', 'Cybrelle.io', 'Cybrelle.com', 'cybrelle.com']
+ALLOWED_HOSTS = ['127.0.0.1','206.189.180.236','cybrelle.io']
 
 
 # Application definition
