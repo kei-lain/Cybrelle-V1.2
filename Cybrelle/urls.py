@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', staff_member_required(admin.site.urls)),
     path('accounts/', include('accounts.urls')),
     path('', include('blog.urls')),
     path('', include('basepages.urls')),

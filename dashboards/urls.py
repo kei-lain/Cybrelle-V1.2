@@ -9,13 +9,14 @@ from .views import Hosts, CybrelleDashboard, AccountInfo, getVulnerabilities, CV
 from .cybrelle import Scanner
 from django.urls import  reverse_lazy
 from .api import api
+from django.contrib.admin.views.decorators import staff_member_required
 
 # from .api import api
 
 
 
 urlpatterns = [
-    path('api/', api.urls),
+    path('api/', staff_member_required(api.urls)),
     # path('api/getCVE', getCVES),
     # path('api/addCVE/<int:pk>/', addCVES),
     path('dashboard', CybrelleDashboard.as_view(), name= 'dashboard'),
