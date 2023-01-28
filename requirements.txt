@@ -5,7 +5,7 @@ aiosignal==1.3.1
 anyio==3.6.2
 apipkg==3.0.1
 appdirs==1.4.4
-argon2==0.1.10
+
 argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
 asgiref==3.4.1
@@ -17,7 +17,7 @@ autopep8==2.0.1
 bcrypt==4.0.1
 CacheControl==0.12.11
 certifi==2021.10.8
-cffi==1.14.6
+
 chardet==5.1.0
 charset-normalizer==2.0.6
 click==8.1.3
@@ -99,12 +99,12 @@ ply==3.11
 progress==1.6
 protobuf==4.21.12
 psutil==5.9.4
-psycopg2==2.9.1
+django[argon2]
 psycopg2-binary==2.9.5
 py==1.11.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-pycairo==1.23.0
+
 pycodestyle==2.10.0
 pycparser==2.20
 pydantic==1.10.4
