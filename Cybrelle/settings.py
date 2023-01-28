@@ -173,7 +173,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL =  os.path.join(BASE_DIR, 'frontend/')
-STATIC_ROOT   =  os.path.join(BASE_DIR, 'frontend/')
+# STATIC_ROOT   =  os.path.join(BASE_DIR, 'frontend/')
 
 LOGIN_REDIRECT_URL =  '/'
 
