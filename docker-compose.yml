@@ -7,7 +7,8 @@ services:
     volumes:
       - static_volume:/frontend
       - media_volume:/media
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn Cybrelle.wsgi.application --bind 0.0.0.0:8000
+ 
 
 volumes:
   static_volume:
