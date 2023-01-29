@@ -24,5 +24,9 @@ RUN python manage.py collectstatic --noinput
 # Expose the port that the app will run on
 EXPOSE 8000
 
+RUN pip install gunicorn
+
 # Start the app
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+CMD ["gunicorn", "--workers=4", "--bind=0.0.0.0:8000", "Cybrelle.wsgi.application"]
