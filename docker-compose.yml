@@ -1,18 +1,5 @@
 version: '3'
 services:
-  nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile-nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /etc/ssl/nginx:/etc/ssl/nginx
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
-    depends_on:
-      - django
   django:
     build:
       context: .
