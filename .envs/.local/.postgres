@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=cybrelle_web_prod
+POSTGRES_USER=dKLFyUcyHKMZYhkNAcNxYHOaVOFVSUNG
+POSTGRES_PASSWORD=XW6azBg0YmMmxxStjDpDVTZXb9gAT4k9GR851iHwzNOZNPeTB4kHbI1L7iOKaVTP
