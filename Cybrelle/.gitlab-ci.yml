@@ -1,0 +1,26 @@
+image: python:3.10
+
+cache:
+  paths:
+    - .pip
+    - .cache
+
+before_script:
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - python manage.py test
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying to production..."
+  only:
+    - main
