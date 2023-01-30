@@ -32,7 +32,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: "Host(`cybrelle.io`) || Host(`206.189.180.236`)"
+      rule: "Host(`206.189.180.236`) || Host(`206.189.180.236`)"
       entryPoints:
         - web-secure
       middlewares:
