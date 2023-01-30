@@ -1,6 +1,10 @@
 log:
   level: INFO
 
+secrets:
+  do-token:
+    external: true
+
 entryPoints:
   web:
     # http
