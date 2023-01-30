@@ -1,36 +1,157 @@
--r base.txt
+aiodjango==0.1.0
+aiohttp==3.8.3
+aiohttp-wsgi==0.10.0
+aiosignal==1.3.1
+anyio==3.6.2
+apipkg==3.0.1
+appdirs==1.4.4
 
-Werkzeug[watchdog]==2.2.2 # https://github.com/pallets/werkzeug
-ipdb==0.13.11  # https://github.com/gotcha/ipdb
-psycopg2==2.9.5  # https://github.com/psycopg/psycopg2
-watchfiles==0.18.1  # https://github.com/samuelcolvin/watchfiles
+argon2-cffi==21.3.0
+argon2-cffi-bindings==21.2.0
+asgiref==3.4.1
+async-timeout==4.0.2
+attrs==22.2.0
+autocommand==2.2.2
+Automat==22.10.0
+autopep8==2.0.1
+bcrypt==4.0.1
+CacheControl==0.12.11
+certifi==2021.10.8
 
-# Testing
-# ------------------------------------------------------------------------------
-mypy==0.982  # https://github.com/python/mypy
-django-stubs==1.14.0  # https://github.com/typeddjango/django-stubs
-pytest==7.2.1  # https://github.com/pytest-dev/pytest
-pytest-sugar==0.9.6  # https://github.com/Frozenball/pytest-sugar
+chardet==5.1.0
+charset-normalizer==2.0.6
+click==8.1.3
+colorama==0.4.6
+commonmark==0.9.1
+constantly==15.1.0
+contextlib2==21.6.0
+crispy-bootstrap5==0.7
+cryptography==38.0.4
+cssselect==1.2.0
+Cython==0.29.32
+defusedxml==0.7.1
+deluge==2.1.1
+distlib==0.3.6
+distro==1.8.0
+dj-database-url==1.0.0
+dj-stripe==2.7.3
+Django==3.2.8
+django-allauth==0.45.0
+django-cors-headers==3.10.0
+django-crispy-forms==1.14.0
+django-environ==0.7.0
+django-filter==21.1
+django-ninja==0.20.0
+django-react-templatetags==6.0.2
+django-rename-app==0.1.5
+djangorestframework==3.12.4
+djantic==0.7.0
+dnspython==2.2.1
+docopt==0.6.2
+docutils==0.19
+et-xmlfile==1.1.0
+exceptiongroup==1.1.0
+fastapi==0.88.0
+filelock==3.8.1
+frozenlist==1.3.3
+future==0.18.2
 
-# Documentation
-# ------------------------------------------------------------------------------
-sphinx==5.3.0  # https://github.com/sphinx-doc/sphinx
-sphinx-autobuild==2021.3.14 # https://github.com/GaretJax/sphinx-autobuild
+greenlet==2.0.1
+h11==0.14.0
+html5lib==1.1
+hyperlink==21.0.0
+idna==3.2
+ifaddr==0.2.0
+importlib-metadata==5.0.0
+incremental==22.10.0
+inflect==6.0.2
+iniconfig==1.1.1
+jaraco.context==4.2.0
+jaraco.functools==3.5.2
+jaraco.text==3.11.0
+jsonfield==3.1.0
+libevdev==0.11
+lxml==4.9.2
+Mako==1.2.4
+Markdown==3.4.1
+MarkupSafe==2.1.1
+meson==1.0.0
+mitrecve==1.1.1
+more-itertools==9.0.0
+msgpack==1.0.4
+multidict==6.0.4
+nspektr==0.4.0
+numpy==1.24.1
+nvdlib==0.7.1
+oauthlib==3.1.1
+openai==0.25.0
+openpyxl==3.0.10
+ordered-set==4.1.0
+packaging==21.3
+pandas==1.5.2
+pandas-stubs==1.5.2.221213
+paramiko==2.12.0
+pep517==0.13.0
+Pillow==9.3.0
+platformdirs==2.6.0
+pluggy==1.0.0
+ply==3.11
+progress==1.6
+protobuf==4.21.12
+psutil==5.9.4
+django[argon2]
+psycopg2-binary==2.9.5
+py==1.11.0
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
 
-# Code quality
-# ------------------------------------------------------------------------------
-flake8==6.0.0  # https://github.com/PyCQA/flake8
-flake8-isort==6.0.0  # https://github.com/gforcada/flake8-isort
-coverage==7.1.0  # https://github.com/nedbat/coveragepy
-black==22.12.0  # https://github.com/psf/black
-pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
-pre-commit==3.0.1  # https://github.com/pre-commit/pre-commit
-
-# Django
-# ------------------------------------------------------------------------------
-factory-boy==3.2.1  # https://github.com/FactoryBoy/factory_boy
-
-django-debug-toolbar==3.8.1  # https://github.com/jazzband/django-debug-toolbar
-django-extensions==3.2.1  # https://github.com/django-extensions/django-extensions
-django-coverage-plugin==3.0.0  # https://github.com/nedbat/django_coverage_plugin
-pytest-django==4.5.2  # https://github.com/pytest-dev/pytest-django
+pycodestyle==2.10.0
+pycparser==2.20
+pydantic==1.10.4
+pydantic-django==0.1.1
+Pygments==2.13.0
+PyJWT==2.2.0
+PyNaCl==1.5.0
+pyOpenSSL==22.1.0
+pyparsing==3.0.9
+pytest==7.2.0
+python-dateutil==2.8.2
+python-dotenv==0.19.1
+python-nmap==0.7.1
+python3-openid==3.2.0
+pytz==2021.3
+pyudev==0.24.0
+pyxdg==0.28
+rencode==1.0.6
+requests==2.28.1
+requests-oauthlib==1.3.0
+resolvelib==0.9.0
+retrying==1.3.3
+rich==13.0.0
+service-identity==21.1.0
+setproctitle==1.3.2
+six==1.16.0
+sniffio==1.3.0
+SQLAlchemy==1.4.45
+sqlparse==0.4.2
+starlette==0.22.0
+stripe==4.2.0
+style==1.1.0
+tenacity==8.1.0
+toml==0.10.2
+tomli==2.0.1
+tqdm==4.64.1
+trove-classifiers==2022.12.22
+Twisted==22.10.0
+types-pytz==2022.7.0.0
+typing_extensions==4.4.0
+update==0.0.1
+urllib3==1.26.7
+uvicorn==0.20.0
+validate-pyproject==0.10.1
+virtualenv==20.17.0
+webencodings==0.5.1
+yarl==1.8.2
+zipp==3.11.0
+zope.interface==5.5.0
+whitenoise
