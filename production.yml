@@ -1,8 +1,6 @@
 version: '3'
 
 volumes:
-  production_postgres_data: {}
-  production_postgres_data_backups: {}
   production_traefik: {}
 
 services:
@@ -12,24 +10,8 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
 
     image: cybrelle_web_prod_production_django
-    depends_on:
-      - postgres
-      - redis
-    env_file:
-      - ./.envs/.production/.django
-      - ./.envs/.production/.postgres
-    command: /start
+    
 
-  postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: cybrelle_web_prod_production_postgres
-    volumes:
-      - production_postgres_data:/var/lib/postgresql/data
-      - production_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.production/.postgres
 
   traefik:
     build:
@@ -44,5 +26,4 @@ services:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
 
-  redis:
-    image: redis:6
+  
