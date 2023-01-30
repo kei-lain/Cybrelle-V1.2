@@ -24,6 +24,12 @@ certificatesResolvers:
       # https://docs.traefik.io/master/https/acme/#httpchallenge
       httpChallenge:
         entryPoint: web
+      acme.dnsChallenge:
+        provider: "digitalocean"
+        delayBeforeCheck : 0
+      # [acme.dnsChallenge]
+      #   provider = "digitalocean"
+      #   delayBeforeCheck = 0
 
 http:
   routers:
