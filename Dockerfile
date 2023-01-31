@@ -1,32 +1,20 @@
-# Base image
-FROM python:3.10-slim-buster
+# Use an official Python image as the base image
+FROM python:3.10-alpine
 
-# Set working directory
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy requirements file
+# Copy the requirements file to the container
 COPY requirements.txt .
 
-# Install required packages
-RUN apt-get update && apt-get install -y \
-    nginx \
-    certbot \
-    python3-dev \
-    libffi-dev \
-    libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Python dependencies
+# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy project files
+# Copy the rest of the application code to the container
 COPY . .
 
-# Configure Nginx
-COPY nginx/default /etc/nginx/sites-available/default
+# Expose port 8000 for the Django development server
+EXPOSE 8000
 
-# Apply Let's Encrypt SSL certificate
-RUN certbot --nginx
-
-# Run Django and Nginx
-CMD ["/bin/bash", "./entrypoint.sh"]
+# Run the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
