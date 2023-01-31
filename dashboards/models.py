@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your models here.
 
 class Host(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # organization = models.OneToOneField(Organization, on_delete=models.CASCADE)
     hostname = models.CharField(max_length=100)
     ip_address = models.GenericIPAddressField()

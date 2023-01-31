@@ -13,7 +13,7 @@ from .models import Host, CVE, Report
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, PermissionRequiredMixin
 import zipp
-from djstripe.models import Subscription
+from djstripe.models import Subscription, Customer
 from django.urls import  reverse_lazy
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -39,7 +39,10 @@ class Hosts(LoginRequiredMixin,CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active').exists()
+        customer = Customer.get_or_create(subscriber=self.request.user)
+        user_subscription = Subscription.objects.filter(customer=customer, status="active")
+        # context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active')
+        context["user_subscription"] = user_subscription
         context["hosts_list"] = Host.objects.filter(user=self.request.user) 
         return context
     
@@ -52,9 +55,10 @@ class Hosts(LoginRequiredMixin,CreateView):
        
      
 
-        user_subscription = Subscription.objects.filter(customer__user=self.request.user, status='active').first()
+        customer = Customer.get_or_create(subscriber=self.request.user)
+        user_subscription = Subscription.objects.filter(customer=customer, status="active")
         # Get the user's subscription plan
-        subscription_plan = Subscription.objects.filter(customer__user=self.request.user)
+        subscription_plan = Subscription.objects.filter(customer=customer)
         # Check the user's plan
         if subscription_plan.filter(id="price_1MTSIRF8tUfTasHO9EmHLIT3") or subscription_plan.filter(id="price_1MUJ3NF8tUfTasHO0Hza5obs"):
             max_host = 5
@@ -70,8 +74,8 @@ class Hosts(LoginRequiredMixin,CreateView):
             return redirect('/hosts')
         else:
     
-            while Host.objects.filter(user=self.request.user, id=host_id).exists():
-                pass
+            # while Host.objects.filter(user=self.request.user, hostname=Host.hostname).exists():
+            #     pass
             return super().form_valid(form)
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
@@ -83,7 +87,9 @@ class CybrelleDashboard(LoginRequiredMixin,ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active').exists()
+        customer = Customer.get_or_create(subscriber=self.request.user)
+        user_subscription = Subscription.objects.filter(customer=customer, status="active")
+        context["user_subscription"] = user_subscription
         context["Hosts"] = Host.objects.filter(user=self.request.user)
         context["CVES"]  = CVE.objects.filter(host__user=self.request.user)
         context["Report"] = Report.objects.filter(host__user=self.request.user)

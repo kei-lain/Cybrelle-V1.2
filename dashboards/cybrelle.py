@@ -16,7 +16,6 @@ socket.setdefaulttimeout(1)
 
 dotenv.load_dotenv()
 
-socket.setdefaulttimeout(5)
 apiKey = os.getenv('API_KEY')
 openai.api_key = os.getenv('OPEN_AI_API_KEY')
 api_endpoint = "https://api.openai.com/v1/completions"
@@ -24,7 +23,7 @@ api_endpoint = "https://api.openai.com/v1/completions"
 
 async def portScanner(address):
     addressInfo = []
-    for port in range(65535):
+    for port in range(10000):
       
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         check = sock.connect_ex((address,port))
