@@ -43,35 +43,30 @@ class Hosts(LoginRequiredMixin,CreateView):
         context["hosts_list"] = Host.objects.filter(user=self.request.user) 
         return context
     
-    @transaction.atomic
-    def form_valid(self, form, defaults=None,*args, **kwargs):
-
-        max_host = 0
+    def form_valid(self, form):
 
         form.instance.user = self.request.user
        
      
-
+        
         user_subscription = Subscription.objects.filter(customer__user=self.request.user, status='active').first()
         # Get the user's subscription plan
-        subscription_plan = Subscription.objects.filter(customer__user=self.request.user)
+        subscription_plan = user_subscription.plan
         # Check the user's plan
-        if subscription_plan.filter(id="price_1MTSIRF8tUfTasHO9EmHLIT3") or subscription_plan.filter(id="price_1MUJ3NF8tUfTasHO0Hza5obs"):
+        if subscription_plan.id == "price_1MTSIRF8tUfTasHO9EmHLIT3" or subscription_plan.id == "price_1MUJ3NF8tUfTasHO0Hza5obs":
             max_host = 5
-        elif subscription_plan.filter(id="price_1MTSJ6F8tUfTasHOmIrwEcEr") or subscription_plan.filter(id="price_1MUJ4BF8tUfTasHOO5nBD7TT"):
+        elif subscription_plan.id == "price_1MTSJ6F8tUfTasHOmIrwEcEr" or subscription_plan.id == "price_1MUJ4BF8tUfTasHOO5nBD7TT":
             max_host = 10
-        elif subscription_plan.filter(id="price_1MUJ4uF8tUfTasHO7olyH7GV") or subscription_plan.filter(id="price_1MTSMxF8tUfTasHOSg8bDYWy"):
+        elif subscription_plan.id == "price_1MUJ4uF8tUfTasHO7olyH7GV" or subscription_plan.id == "price_1MTSMxF8tUfTasHOSg8bDYWy":
             max_host = 20
         else:
             max_host = 5
         # Get the number of host objects the user has already created
-        if Host.objects.filter(user=self.request.user).count() >= max_host:
-        # if user_host_count + 1 > max_host:
-            return redirect('/hosts')
+        user_host_count = Host.objects.filter(user=self.request.user).count()
+        if user_host_count >= max_host:
+            return HttpResponse("You have reached the limit of host objects you can create with your subscription.")
         else:
-    
-            while Host.objects.filter(user=self.request.user, id=host_id).exists():
-                pass
+            form.instance.user = self.request.user
             return super().form_valid(form)
    
 

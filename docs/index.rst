@@ -1,9 +1,9 @@
-.. Cybrelle-web-prod documentation master file, created by
+.. cybrelle_web_v1 documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Cybrelle-web-prod's documentation!
+Welcome to cybrelle_web_v1's documentation!
 ======================================================================
 
 .. toctree::

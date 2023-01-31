@@ -1,10 +1,6 @@
 log:
   level: INFO
 
-secrets:
-  do-token:
-    external: true
-
 entryPoints:
   web:
     # http
@@ -29,14 +25,10 @@ certificatesResolvers:
       httpChallenge:
         entryPoint: web
 
-      dnsChallenge:
-        provider : "digitalocean"
-        delayBeforeCheck :  0
-
 http:
   routers:
     web-secure-router:
-      rule: "Host(`cybrelle.io`) || Host(`cybrelle.io`)"
+      rule: "Host(`cybrelle.io`) || Host(`www.cybrelle.io`)"
       entryPoints:
         - web-secure
       middlewares:

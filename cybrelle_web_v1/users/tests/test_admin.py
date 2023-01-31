@@ -1,6 +1,6 @@
 from django.urls import reverse
 
-from cybrelle_web_prod.users.models import User
+from cybrelle_web_v1.users.models import User
 
 
 class TestUserAdmin:

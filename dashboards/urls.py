@@ -16,7 +16,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 urlpatterns = [
-    path('api/', (api.urls)),
+    path('api/', staff_member_required(api.urls)),
     # path('api/getCVE', getCVES),
     # path('api/addCVE/<int:pk>/', addCVES),
     path('dashboard', CybrelleDashboard.as_view(), name= 'dashboard'),

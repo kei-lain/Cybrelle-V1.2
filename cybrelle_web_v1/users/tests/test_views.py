@@ -8,10 +8,10 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 
-from cybrelle_web_prod.users.forms import UserAdminChangeForm
-from cybrelle_web_prod.users.models import User
-from cybrelle_web_prod.users.tests.factories import UserFactory
-from cybrelle_web_prod.users.views import (
+from cybrelle_web_v1.users.forms import UserAdminChangeForm
+from cybrelle_web_v1.users.models import User
+from cybrelle_web_v1.users.tests.factories import UserFactory
+from cybrelle_web_v1.users.views import (
     UserRedirectView,
     UserUpdateView,
     user_detail_view,

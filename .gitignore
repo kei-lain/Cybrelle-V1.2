@@ -272,7 +272,7 @@ tags
 dump.rdb
 
 ### Project template
-cybrelle_web_prod/media/
+cybrelle_web_v1/media/
 
 .pytest_cache/
 .ipython/

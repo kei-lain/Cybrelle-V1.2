@@ -10,7 +10,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=_source
 set BUILDDIR=_build
-set APP=..\cybrelle_web_prod
+set APP=..\cybrelle_web_v1
 
 if "%1" == "" goto help
 

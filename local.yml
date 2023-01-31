@@ -1,36 +1,51 @@
 version: '3'
 
-
+volumes:
+  cybrelle_web_v1_local_postgres_data: {}
+  cybrelle_web_v1_local_postgres_data_backups: {}
 
 services:
   django:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: cybrelle_web_prod_local_django
-    container_name: cybrelle_web_prod_local_django
-    
-    # volumes:
-    #   - .:/app:z
-    # env_file:
-    #   - ./.envs/.local/.django
+    image: cybrelle_web_v1_local_django
+    container_name: cybrelle_web_v1_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
     command: /start
 
-  
-  # docs:
-  #   image: cybrelle_web_prod_local_docs
-  #   container_name: cybrelle_web_prod_local_docs
-  #   build:
-  #     context: .
-  #     dockerfile: ./compose/local/docs/Dockerfile
-  #   env_file:
-  #     - ./.envs/.local/.django
-  #   volumes:
-  #     - ./docs:/docs:z
-  #     - ./config:/app/config:z
-  #     - ./cybrelle_web_prod:/app/cybrelle_web_prod:z
-  #   ports:
-  #     - "9000:9000"
-  #   command: /start-docs
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: cybrelle_web_v1_production_postgres
+    container_name: cybrelle_web_v1_local_postgres
+    volumes:
+      - cybrelle_web_v1_local_postgres_data:/var/lib/postgresql/data
+      - cybrelle_web_v1_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+
+  docs:
+    image: cybrelle_web_v1_local_docs
+    container_name: cybrelle_web_v1_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./cybrelle_web_v1:/app/cybrelle_web_v1:z
+    ports:
+      - "9000:9000"
+    command: /start-docs

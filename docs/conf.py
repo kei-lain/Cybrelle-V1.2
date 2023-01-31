@@ -26,7 +26,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "Cybrelle-web-prod"
+project = "cybrelle_web_v1"
 copyright = """2023, Lainey Tubbs"""
 author = "Lainey Tubbs"
 

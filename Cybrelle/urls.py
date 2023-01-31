@@ -22,7 +22,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 urlpatterns = [
-    path('admin/', (admin.site.urls)),
+    path('admin/', staff_member_required(admin.site.urls)),
     path('accounts/', include('accounts.urls')),
     path('', include('blog.urls')),
     path('', include('basepages.urls')),

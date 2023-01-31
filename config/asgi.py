@@ -1,5 +1,5 @@
 """
-ASGI config for Cybrelle-web-prod project.
+ASGI config for cybrelle_web_v1 project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -14,9 +14,9 @@ from pathlib import Path
 from django.core.asgi import get_asgi_application
 
 # This allows easy placement of apps within the interior
-# cybrelle_web_prod directory.
+# cybrelle_web_v1 directory.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
-sys.path.append(str(BASE_DIR / "cybrelle_web_prod"))
+sys.path.append(str(BASE_DIR / "cybrelle_web_v1"))
 
 # If DJANGO_SETTINGS_MODULE is unset, default to the local settings
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")

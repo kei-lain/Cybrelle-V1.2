@@ -60,7 +60,9 @@ RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
 
-
+COPY --chown=django:django ./compose/production/django/entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /entrypoint
+RUN chmod +x /entrypoint
 
 
 COPY --chown=django:django ./compose/production/django/start /start
@@ -76,3 +78,4 @@ RUN chown django:django ${APP_HOME}
 
 USER django
 
+ENTRYPOINT ["/entrypoint"]

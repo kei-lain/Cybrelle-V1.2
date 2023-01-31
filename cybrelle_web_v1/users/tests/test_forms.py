@@ -3,8 +3,8 @@ Module for all Form Tests.
 """
 from django.utils.translation import gettext_lazy as _
 
-from cybrelle_web_prod.users.forms import UserAdminCreationForm
-from cybrelle_web_prod.users.models import User
+from cybrelle_web_v1.users.forms import UserAdminCreationForm
+from cybrelle_web_v1.users.models import User
 
 
 class TestUserAdminCreationForm:

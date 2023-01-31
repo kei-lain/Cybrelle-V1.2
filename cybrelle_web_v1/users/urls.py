@@ -1,6 +1,6 @@
 from django.urls import path
 
-from cybrelle_web_prod.users.views import (
+from cybrelle_web_v1.users.views import (
     user_detail_view,
     user_redirect_view,
     user_update_view,

@@ -41,7 +41,7 @@ def update_site_forward(apps, schema_editor):
         Site,
         schema_editor.connection,
         "cybrelle.io",
-        "Cybrelle-web-prod",
+        "cybrelle_web_v1",
     )
 
 
