@@ -72,7 +72,7 @@ class Hosts(LoginRequiredMixin,CreateView):
     
             while Host.objects.filter(user=self.request.user, id=host_id).exists():
                 pass
-            return super().form_valid(for
+            return super().form_valid(form)
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host

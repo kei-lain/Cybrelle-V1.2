@@ -20,6 +20,7 @@ from django.contrib.auth.decorators import user_passes_test
 
 
 
+
 urlpatterns = [
     path('admin/', (admin.site.urls)),
     path('accounts/', include('accounts.urls')),
