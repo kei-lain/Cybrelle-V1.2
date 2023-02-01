@@ -9,7 +9,7 @@
     <h1 class="heading-11">Hosts</h1>
     <div class="button-primary-3">
       {% for host in Hosts%}
-      <button onclick="location.href='{% url 'dashboard' host_id=host.id %}'">Start Scan</button>
+      <button onclick="location.href='{% url 'dashboard' host_id=host.id %}'">Start Scan for {{host.hostname}}</button>
       {% endfor %}
     </div>
   </div>

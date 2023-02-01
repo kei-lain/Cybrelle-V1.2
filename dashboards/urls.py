@@ -9,7 +9,7 @@ from .views import Hosts, CybrelleDashboard, AccountInfo, getVulnerabilities, CV
 from .cybrelle import Scanner
 from django.urls import  reverse_lazy
 from .api import api
-
+from Cybrelle.custom_decorators import staff_required
 
 # from .api import api
 

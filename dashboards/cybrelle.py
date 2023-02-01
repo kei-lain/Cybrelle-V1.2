@@ -12,7 +12,7 @@ from requests.exceptions import HTTPError
 
 
 
-socket.setdefaulttimeout(1)
+socket.setdefaulttimeout(5)
 
 dotenv.load_dotenv()
 
@@ -23,7 +23,7 @@ api_endpoint = "https://api.openai.com/v1/completions"
 
 async def portScanner(address):
     addressInfo = []
-    for port in range(10000):
+    for port in range(60000):
       
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         check = sock.connect_ex((address,port))
@@ -212,7 +212,7 @@ async def reportGen(address,username,password):
         print(configInfo)
 
 
-        prompt = (f'Can you explain if {config} is secure. If not please summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is not important, please skip over.')
+        prompt = (f'Can you explain if {config} is secure. If not please summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is not important, please skip over. Leave a new line space after writing')
         # response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
         # completed_text = response.json()
         try:
@@ -255,7 +255,7 @@ async def readConfigs(address, username, password):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(address, port=22, username=username, password=password)
-    listConfigs = ("sudo find /etc -name *.conf")
+    listConfigs = ("find /etc -name *.conf")
     stdin, stdout, stderr = client.exec_command(listConfigs)
     configs = stdout.readlines()
     print(configs)

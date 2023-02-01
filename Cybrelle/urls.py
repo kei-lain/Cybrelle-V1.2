@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.decorators import user_passes_test
+from .custom_decorators import staff_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import user_passes_test
 
-
-
-
+def staff_check(user):
+    return user.is_staff
 
 urlpatterns = [
     path('admin/', (admin.site.urls)),

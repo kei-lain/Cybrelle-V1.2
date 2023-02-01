@@ -12,7 +12,6 @@ before_script:
 
 stages:
   - test
-  - build_image
   - deploy
 
 
@@ -20,17 +19,6 @@ test:
   stage: test
   script:
     - python manage.py test
-
-build_image:
-  image: docker:20.10
-  services:
-    - docker:20.10-dind
-  before_script:
-    - echo "$REGISTRY_PASS" | docker login -u $REGISTRY_USER --password-stdin registry.digitalocean.com
-  script:
-    - docker build -t cybrelle-django 
-    - docker tag cybrelle-django registry.digitalocean.com/cybrelle-registry/cybrelle-django
-    - docker push registry.digitalocean.com/cybrelle-registry/cybrelle-django
 
 deploy:
   stage: deploy
