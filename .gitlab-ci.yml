@@ -1,6 +1,5 @@
 image: python:3.10-slim-buster
 
-
 cache:
   paths:
     - .pip
@@ -11,11 +10,15 @@ before_script:
   - pip install -r requirements.txt
 
 stages:
+  - test
   - build
   - deploy
 
-
-
+test:
+  stage: test
+  script:
+    - export DJANGO_SETTINGS_MODULE=Cybrelle.settings
+    - python manage.py test
 
 build:
   stage: build
@@ -23,9 +26,8 @@ build:
   services:
     - docker:20.10-dind
   script:
-
-    - docker login -p $DOAPITOKEN registry.digitalocean.com/cybrelle-registry
-    - docker compose build
+    - docker login -p $DOAPITOKEN registry.digitalocean.com
+    - docker build .
     - docker tag cybrelle-web registry.digitalocean.com/cybrelle-registry/cybrelle-web
     - docker push registry.digitalocean.com/cybrelle-registry/cybrelle-web
 
@@ -35,5 +37,3 @@ deploy:
     - echo "Ready for deployment..."
   only:
     - main
-
-
