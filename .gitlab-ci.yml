@@ -18,6 +18,7 @@ test:
   stage: test
   script:
     - export DJANGO_SETTINGS_MODULE=Cybrelle.settings
+    - pip install dj-database-url
     - python manage.py test
 
 build:
