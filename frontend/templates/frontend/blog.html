@@ -10,8 +10,8 @@
             <div class="team-block"><img src="https://uploads-ssl.webflow.com/62434fa732124a0fb112aab4/62434fa732124af1aa12aadf_placeholder%201.svg" loading="lazy" alt="" class="team-member-image-two">
               <div class="team-block-info">
         {% for article in articles%}
-                <h3 class="team-member-name-two">{{ article.post_title}}</h3>
-                <p class="team-member-text">{{ article.post_body }}</p>
+                <h3 class="team-member-name-two"><a href="{% url 'blog' article.id %}">{{ article.post_title}}</h3>
+                <p class="team-member-text">{{ article.post_body | truncatechars:40 }}</p>
                 <a href="#" class="text-link-arrow w-inline-block">
                   <div class="text-block">Read more</div>
                   <div class="arrow-embed w-embed"><svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,31 +32,7 @@
       </div>
     </div>
   </section>
-  <section class="footer-subscribe wf-section">
-    <div class="container-7">
-      <div class="footer-form-two w-form">
-        <form id="wf-form-Footer-Form-Two" name="wf-form-Footer-Form-Two" data-name="Footer Form Two" method="post" class="footer-form-container-two" action="{% url 'subscription' %}">
-          <div class="footer-form-title">Subscribe to our Newsletters</div>
-          <div class="footer-form-block-two"><input type="email" class="footer-form-input w-input" maxlength="256" name="Footer-Email-Two" data-name="Footer Email Two" aria-label="Enter your email" placeholder="Enter your email" id="Footer-Email-Two" required=""><input type="submit" value="Subscribe Now" data-wait="Please wait..." class="button-primary-4 footer-form-button w-button"></div>
-        </form>
-            {% if messages %}
-      {% for message in messages %}
-        <div class="my-5 alert alert-success">
-          <h5 class="m-0">
-              {{ message }}
-      </h5></div>
-        <div class="w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
-      </div>
-    </div>
-    
-</section>
- {% endfor %}
-  {% endif %}
+
 
 {% endblock %}
  

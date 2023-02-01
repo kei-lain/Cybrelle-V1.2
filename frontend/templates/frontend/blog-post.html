@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block title%} Blog Post{% endblock %}
+{% block content%}
+  <div class="wf-section"></div>
+  <div class="section wf-section"></div>
+  <div class="wf-section"></div>
+  <section class="hero-without-image-3 wf-section">
+    <div class="container-17">
+      <div class="hero-wrapper-two-3">
+        <h1>{{article.post_title}}</h1>
+        <p class="margin-bottom-24px-5">{{article.post_body}}</p>
+        <a href="{% url 'blog' %}" class="button-primary-7 w-button">Back</a>
+      </div>
+    </div>
+  </section>
+{%endblock%}
