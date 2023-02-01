@@ -5,11 +5,8 @@ services:
     ports:
       - "8000:8000"
 
-  # nginx:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-nginx
-  #   ports:
-  #     - "80:80"
-  #   depends_on:
-  #     - web
+  nginx:
+    build: Dockerfile-nginx
+    ports:
+      - "80:80"
+      - "443:443"
