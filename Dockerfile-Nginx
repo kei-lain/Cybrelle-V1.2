@@ -1,8 +1,0 @@
-FROM nginx:latest
-
-RUN apt-get update \
-    && apt-get install -y certbot python-certbot-nginx -t buster-backports \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY default.conf /etc/nginx/conf.d/
-COPY upstream.conf /etc/nginx/conf.d/
