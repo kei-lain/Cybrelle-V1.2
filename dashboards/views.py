@@ -34,7 +34,8 @@ class Hosts(LoginRequiredMixin,CreateView):
     model = Host
     fields = 'hostname','ip_address','host_username', 'host_password', 'host_OS'
   
-    success_url = reverse_lazy('hosts')
+    reverse_lazy =("/hosts")
+    success_url = ("/hosts")
     template_name = 'hosts.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -77,6 +78,24 @@ class Hosts(LoginRequiredMixin,CreateView):
             # while Host.objects.filter(user=self.request.user, hostname=Host.hostname).exists():
             #     pass
             return super().form_valid(form)
+    
+class EditHost(LoginRequiredMixin, UpdateView):
+    model = Host
+    fields = 'hostname','ip_address','host_username', 'host_password', 'host_OS'
+    reverse_lazy =("/hosts")
+    success_url = ("/hosts")
+    template_name = 'edit_host.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customer = Customer.get_or_create(subscriber=self.request.user)
+        user_subscription = Subscription.objects.filter(customer=customer, status="active")
+        # context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active')
+        context["user_subscription"] = user_subscription
+        context["hosts_list"] = Host.objects.filter(user=self.request.user) 
+        return context
+    
+
 
 class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host

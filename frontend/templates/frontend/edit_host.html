@@ -10,12 +10,12 @@
     <div class="w-layout-grid">
       {% for host in hosts_list %}
       <div id="w-node-e5d5fdc2-1973-4783-0522-2aecbf090ba3-d8994865" class="text-block-7">{{host.ip_address}}</div>
-      <div id="w-node-_36080ea6-90b0-3351-fe1f-90af7e0e39e4-d8994865" class="text-block-8"><a href="{% url 'edit-host' host.id %}">{{host.hostname }}</a></div>
+      <div id="w-node-_36080ea6-90b0-3351-fe1f-90af7e0e39e4-d8994865" class="text-block-8"><a href="{% url 'edit-host' host.id  %}">{{host.hostname }}</a></div>
       {% endfor %}
     </div>
   </div>
   <div class="w-container">
-    <h1 class="heading-12">Add A New Host</h1>
+    <h1 class="heading-12">Edit {{host.hostname}}</h1>
     <form method="POST">
       {% csrf_token %}{{form|crispy}}
       <input type="submit" value="Submit">
