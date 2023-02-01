@@ -12,13 +12,29 @@ before_script:
 
 stages:
   - test
+  - build
   - deploy
 
 
 test:
   stage: test
   script:
+    - python manage.py makemigrations
+    - python manage.py migrate
     - python manage.py test
+
+
+build:
+  stage: build
+  image: docker:20.10
+  services:
+    - docker:20.10-dind
+  script:
+
+    - docker login -p $DOAPITOKEN registry.digitalocean.com/cybrelle-registry
+    - docker compose build
+    - docker tag cybrelle-web registry.digitalocean.com/cybrelle-registry/cybrelle-web
+    - docker push registry.digitalocean.com/cybrelle-registry/cybrelle-web
 
 deploy:
   stage: deploy
