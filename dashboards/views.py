@@ -122,7 +122,7 @@ class CVEView(LoginRequiredMixin, DetailView):
 
 def getVulnerabilities(request, host_id):
    
-        response =  requests.post(f"https://localhost:8080/api/cves/{host_id}")
+        response =  requests.post(f"https://0.0.0.0:8080/api/cves/{host_id}")
         data = response
         while data is not None:
             return redirect('dashboard')
