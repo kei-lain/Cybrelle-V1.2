@@ -49,7 +49,6 @@ def cves(request):
 
 
 @api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error})
-
 async def cves(request,host_id: int):
     threads = []
     sections = []
