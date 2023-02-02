@@ -12,7 +12,7 @@ from requests.exceptions import HTTPError
 
 
 
-socket.setdefaulttimeout(5)
+socket.setdefaulttimeout(1)
 
 dotenv.load_dotenv()
 
