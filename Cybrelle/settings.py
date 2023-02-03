@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'cybrelle.io', 'king-prawn-app-ow9ad.ondigitalocean.app', 'localhost', '0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1', 'cybrelle.io', '146.190.14.147','146.190.13.233','*' ,'localhost', '0.0.0.0']
 
 
 # Application definition
@@ -110,7 +110,7 @@ DATABASES = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST = 'smtp.office365.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'admin@cybrelle.io'

@@ -23,7 +23,7 @@ api_endpoint = "https://api.openai.com/v1/completions"
 
 async def portScanner(address):
     addressInfo = []
-    for port in range(1,60000):
+    for port in range(1,10000):
       
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         check = sock.connect_ex((address,port))

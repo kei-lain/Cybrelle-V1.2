@@ -1,0 +1,4 @@
+installCRDS: false
+
+prometheus:
+  enabled: False
