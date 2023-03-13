@@ -1,4 +1,5 @@
 from ninja import NinjaAPI
+
 from ninja.responses import codes_2xx
 import pydantic
 from ninja.errors import HttpError , ValidationError, ConfigError
@@ -22,15 +23,27 @@ from django.core.serializers import serialize
 from .schema import HostSchema , CVESchema, NotFoundSchema , ReportSchema, Error
 import dotenv, os
 import asyncio
+from ninja.security import APIKeyHeader
 
 dotenv.load_dotenv(".env")
 apiKey = os.getenv('API_KEY')
 api = NinjaAPI()
 
 
+class ApiKey(APIKeyHeader):
+    param_name = "X-API-Key"
+
+    def authenticate(self, request, key):
+        if key == os.getenv('Cybrelle_API_KEY'):
+            return key
+
+
+header_key = ApiKey()
+
+
 stripe.api_key = settings.STRIPE_LIVE_SECRET_KEY
 
-@api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema})
+@api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema}, auth=header_key)
 def host(request, host_id: int):
     try:
         host = Host.objects.get(pk=host_id)
@@ -39,7 +52,7 @@ def host(request, host_id: int):
     except Host.DoesNotExist as e:
         return 404, {"message": "Host does not exist"}
 
-@api.post("hosts/", response={201: HostSchema})
+@api.post("hosts/", response={201: HostSchema}, auth=header_key)
 def create_host(request, host: HostSchema):
     host = Host.objects.create(**host.dict())
     return host
@@ -48,7 +61,7 @@ def cves(request):
     return  CVE.objects.all()
 
 
-@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error})
+@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error}, auth=header_key)
 async def cves(request,host_id: int):
     threads = []
     sections = []
@@ -118,7 +131,7 @@ async def cves(request,host_id: int):
     return 201, new_cve, 
 
 
-@api.get("reports/{host_id}", response={200: ReportSchema})
+@api.get("reports/{host_id}", response={200: ReportSchema}, auth=header_key)
 def reports(request, host_id: int):
     host = Host.objects.get(pk=host_id)
     reports = Report.objects.all().filter(host=host)

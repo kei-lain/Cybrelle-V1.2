@@ -1,4 +1,4 @@
-installCRDS: false
+installCRDS: true
 
 prometheus:
   enabled: False

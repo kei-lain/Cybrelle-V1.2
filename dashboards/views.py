@@ -5,6 +5,8 @@ from .forms import HostForm
 import json
 import requests
 import aiohttp
+from aiohttp import web
+import asyncio
 from django.contrib.auth import get_user_model
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
@@ -120,12 +122,31 @@ class CVEView(LoginRequiredMixin, DetailView):
     context_object_name = 'cve'
     template_name = 'cve-info.html'
 
-def getVulnerabilities(request, host_id):
-   
-        response =  requests.post(f"http://localhost:8080/api/cves/{host_id}")
-        data = response
-        while data is not None:
-            return redirect('dashboard')
+# def getVulnerabilities(request, host_id):
+#         response =  requests.post(f"https://cybrelle.io/api/cves/{host_id}")
+#         data = response
+#         while data is not None:
+#             redirect("dashboard")
+
+
+
+
+async def getVulnerabilities(request, host_id):
+    api_key = os.getenv('Cybrelle_API_KEY')
+    headers = {'Authorization': f'Bearer {api_key}'}
+    header_key = ApiKey()
+
+    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+        async with session.post(f"https://127.0.0.1/api/cves/{host_id}", headers=headers, auth=header_key) as resp:
+            data = await resp.json()
+
+    await web.redirect("dashboard")
+# async def getVulnerabilities(request, host_id):
+#     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+#         async with session.post(f"https://cybrelle.io/api/cves/{host_id}") as resp:
+#             data = await resp.json()
+#     await web.redirect("dashboard")
+
 
 
 class ReportView(LoginRequiredMixin,DetailView):

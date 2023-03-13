@@ -16,7 +16,6 @@ class RegistrationForm(UserCreationForm):
     
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.organization = Organization.objects.create(name=self.cleaned_data['organization_name'])
         if commit:
             user.save()
         return user

@@ -17,6 +17,7 @@ stripe.api_key = settings.STRIPE_LIVE_SECRET_KEY
 
 YOUR_DOMAIN = '127.0.0.1:8000'
 
+stripe.Account.retrieve("acct_1MTD1cF8tUfTasHO")
 
 class Pricing(ListView):
     model = Subscription
@@ -87,7 +88,43 @@ def cancel(request):
       stripe.Subscription.delete(sub_id)
     except Exception as e:
       return JsonResponse({'error': (e.args[0])}, status =403)
+
   return redirect("/")
+
+# def customer_portal(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         payment_method = data['payment_method']
+#         stripe.api_key = settings.STRIPE_LIVE_SECRET_KEY
+
+#         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
+#         # Authenticate your user.
+#         session = stripe.billing_portal.Session.create(
+#             customer= stripe.Customer.create(payment_method=payment_method,email=request.user.email,invoice_settings={'default_payment_method': payment_method})
+
+            
+#         )
+#         return_url='https://cybrelle.io/profile'
+#         return redirect(session.url)
+
+# @csrf_exempt
+# def customer_portal(request):
+#     if request.method == 'POST':
+        
+#         data = request.POST
+#         payment_method = data.get('payment_method')
+#         stripe.api_key = settings.STRIPE_LIVE_SECRET_KEY
+
+#         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
+#         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
+#           # Authenticate your user.
+#         customer = stripe.Customer.create(payment_method=payment_method, email=request.user.email, invoice_settings={'default_payment_method': payment_method})
+#         session = stripe.billing_portal.Session.create(
+#             customer=customer,
+#             return_url='http://127.0.0.1:8080/profile',
+#         )
+#         return redirect(session.url)
+
 
 class Checkout(ListView):
 	model = Product
@@ -99,9 +136,12 @@ class Checkout(ListView):
 class Profile(TemplateView, LoginRequiredMixin):
 
   template_name = 'subscription/profile.html'
+  
   def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
-      context["user_subscription"] = Subscription.objects.filter(customer__user=self.request.user, status='active').exists()
+      customer = Customer.get_or_create(subscriber=self.request.user)
+      user_subscription = Subscription.objects.filter(customer=customer, status="active")
+      context["user_subscription"] = user_subscription
       return context
   
 

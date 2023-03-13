@@ -1,2 +1,12 @@
+annotations:
+  kubernetes.digitalocean.com/load-balancer-id: 727f0bd2-330e-48eb-9314-367333ee1ffe
 controller:
-  replicaCount: 2
+  config:
+    proxy-buffer-size: "64k"
+    proxy_read_timeout: "2000"
+    proxy_connect_timeout: "2000"
+    fastcgi_read_timeout: "2000"
+    proxy_send_timeout:   "3000"
+    keepalive: "3200"
+  replicas: 2
+

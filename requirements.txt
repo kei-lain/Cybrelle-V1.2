@@ -5,9 +5,9 @@ aiosignal==1.3.1
 anyio==3.6.2
 apipkg==3.0.1
 appdirs==1.4.4
-
 argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
+arrow==1.2.3
 asgiref==3.4.1
 async-timeout==4.0.2
 attrs==22.2.0
@@ -15,9 +15,10 @@ autocommand==2.2.2
 Automat==22.10.0
 autopep8==2.0.1
 bcrypt==4.0.1
+binaryornot==0.4.4
 CacheControl==0.12.11
 certifi==2021.10.8
-
+cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==2.0.6
 click==8.1.3
@@ -25,6 +26,7 @@ colorama==0.4.6
 commonmark==0.9.1
 constantly==15.1.0
 contextlib2==21.6.0
+cookiecutter==2.1.1
 crispy-bootstrap5==0.7
 cryptography==38.0.4
 cssselect==1.2.0
@@ -55,8 +57,8 @@ fastapi==0.88.0
 filelock==3.8.1
 frozenlist==1.3.3
 future==0.18.2
-
 greenlet==2.0.1
+gunicorn==20.1.0
 h11==0.14.0
 html5lib==1.1
 hyperlink==21.0.0
@@ -69,6 +71,8 @@ iniconfig==1.1.1
 jaraco.context==4.2.0
 jaraco.functools==3.5.2
 jaraco.text==3.11.0
+Jinja2==3.1.2
+jinja2-time==0.2.0
 jsonfield==3.1.0
 libevdev==0.11
 lxml==4.9.2
@@ -99,12 +103,10 @@ ply==3.11
 progress==1.6
 protobuf==4.21.12
 psutil==5.9.4
-django[argon2]
 psycopg2-binary==2.9.5
 py==1.11.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-
 pycodestyle==2.10.0
 pycparser==2.20
 pydantic==1.10.4
@@ -118,10 +120,12 @@ pytest==7.2.0
 python-dateutil==2.8.2
 python-dotenv==0.19.1
 python-nmap==0.7.1
+python-slugify==8.0.0
 python3-openid==3.2.0
 pytz==2021.3
 pyudev==0.24.0
 pyxdg==0.28
+PyYAML==6.0
 rencode==1.0.6
 requests==2.28.1
 requests-oauthlib==1.3.0
@@ -138,6 +142,7 @@ starlette==0.22.0
 stripe==4.2.0
 style==1.1.0
 tenacity==8.1.0
+text-unidecode==1.3
 toml==0.10.2
 tomli==2.0.1
 tqdm==4.64.1
@@ -151,7 +156,7 @@ uvicorn==0.20.0
 validate-pyproject==0.10.1
 virtualenv==20.17.0
 webencodings==0.5.1
+whitenoise==6.3.0
 yarl==1.8.2
 zipp==3.11.0
 zope.interface==5.5.0
-whitenoise

@@ -23,7 +23,7 @@ api_endpoint = "https://api.openai.com/v1/completions"
 
 async def portScanner(address):
     addressInfo = []
-    for port in range(1,10000):
+    for port in range(10000):
       
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         check = sock.connect_ex((address,port))
@@ -212,7 +212,7 @@ async def reportGen(address,username,password):
         print(configInfo)
 
 
-        prompt = (f'Can you explain if {config} is secure. If not please summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is not important, please skip over. Leave a new line space after writing')
+        prompt = (f'Can you explain if {config} is secure. If not please summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is not important, please skip over.')
         # response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
         # completed_text = response.json()
         try:

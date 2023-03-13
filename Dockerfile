@@ -11,11 +11,13 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
+
 # Copy the rest of the application code to the container
 COPY . .
 
 # Expose port 8000 for the Django development server
 EXPOSE 8080
 
+
 # Run the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+CMD ["gunicorn", "--workers=4","--timeout=20000", "--bind=0.0.0.0:8080", "Cybrelle.wsgi:application"]

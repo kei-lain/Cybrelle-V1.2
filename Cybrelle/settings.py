@@ -28,7 +28,6 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 ALLOWED_HOSTS = ['127.0.0.1', 'cybrelle.io', '146.190.14.147','146.190.13.233','*' ,'localhost', '0.0.0.0']
 
 
@@ -138,9 +137,7 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
+
 
 
 
@@ -155,7 +152,7 @@ DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = False
 
 # SECURE_HSTS_SECONDS = 31536000 # 1 year
 # SECURE_HSTS_PRELOAD = True
