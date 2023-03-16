@@ -23,6 +23,12 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from subscriptions.mixins import SubscriptionRequiredMixin
+# from rest_framework_api_key.authentication import ApiKeyAuthentication
+# from ninja import Router
+import os
+import aiohttp
+
+
 
 
 
@@ -131,16 +137,12 @@ class CVEView(LoginRequiredMixin, DetailView):
 
 
 
-async def getVulnerabilities(request, host_id):
-    api_key = os.getenv('Cybrelle_API_KEY')
-    headers = {'Authorization': f'Bearer {api_key}'}
-    header_key = ApiKey()
+def getVulnerabilities(request, host_id):
+    with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+        with session.post(f"https://127.0.0.1/api/cves/{host_id}") as resp:
+            data = resp.json()
 
-    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-        async with session.post(f"https://127.0.0.1/api/cves/{host_id}", headers=headers, auth=header_key) as resp:
-            data = await resp.json()
-
-    await web.redirect("dashboard")
+    return data
 # async def getVulnerabilities(request, host_id):
 #     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
 #         async with session.post(f"https://cybrelle.io/api/cves/{host_id}") as resp:

@@ -27,7 +27,7 @@ load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'cybrelle.io', '146.190.14.147','146.190.13.233','*' ,'localhost', '0.0.0.0']
 
 
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django_filters',
     'crispy_bootstrap5',
     'django_rename_app',
+    'django_celery_beat',
+    'django_celery_results',
     'djstripe',
     'accounts',
     'blog',
@@ -93,6 +95,13 @@ TEMPLATES = [
         },
     },
 ]
+
+CELERY_RESULT_BACKEND = "default"
+
+CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061')
+
+
+
 
 WSGI_APPLICATION = 'Cybrelle.wsgi.application'
 

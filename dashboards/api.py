@@ -23,11 +23,11 @@ from django.core.serializers import serialize
 from .schema import HostSchema , CVESchema, NotFoundSchema , ReportSchema, Error
 import dotenv, os
 import asyncio
-from ninja.security import APIKeyHeader
+from ninja.security import APIKeyHeader, django_auth
 
 dotenv.load_dotenv(".env")
 apiKey = os.getenv('API_KEY')
-api = NinjaAPI()
+api = NinjaAPI(csrf=True)
 
 
 class ApiKey(APIKeyHeader):
@@ -61,7 +61,7 @@ def cves(request):
     return  CVE.objects.all()
 
 
-@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error}, auth=header_key)
+@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error}, auth=django_auth)
 async def cves(request,host_id: int):
     threads = []
     sections = []
