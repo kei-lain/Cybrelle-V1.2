@@ -96,10 +96,12 @@ TEMPLATES = [
     },
 ]
 
-CELERY_RESULT_BACKEND = "default"
+# CELERY_RESULT_BACKEND = "default"
 
-CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061')
+# CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061')
 
+CELERY_BROKER_URL = "rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061"
+CELERY_RESULT_BACKEND = "rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061"
 
 
 
@@ -161,7 +163,7 @@ DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = False
 
 # SECURE_HSTS_SECONDS = 31536000 # 1 year
 # SECURE_HSTS_PRELOAD = True

@@ -109,6 +109,8 @@ class CybrelleDashboard(LoginRequiredMixin,ListView):
     model = Host
     context_object_name = "Hosts"
     template_name = 'dashboard-main.html'
+    reverse_lazy = ("dashboard")
+    
     # User =get_user_model()
     # user = User.objects.all()
 
@@ -137,17 +139,26 @@ class CVEView(LoginRequiredMixin, DetailView):
 
 
 
-def getVulnerabilities(request, host_id):
-    with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-        with session.post(f"https://127.0.0.1/api/cves/{host_id}") as resp:
-            data = resp.json()
+# def getVulnerabilities(request, host_id):
+#     with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+#         with session.post(f"https://127.0.0.1/api/cves/{host_id}") as resp:
+#             data = resp.json()
 
-    return data
-# async def getVulnerabilities(request, host_id):
-#     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-#         async with session.post(f"https://cybrelle.io/api/cves/{host_id}") as resp:
-#             data = await resp.json()
-#     await web.redirect("dashboard")
+#     return data
+
+# def getVulnerabilities(request, host_id):
+   
+#         response =  requests.post(f"http:/0.0.0.0/api/cves/{host_id}")
+#         data = response
+#         while data is not None:
+#             return redirect('dashboard')
+
+async def getVulnerabilities(request, host_id):
+    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+        async with session.post(f"http://127.0.0.1:8080/api/cves/{host_id}") as resp:
+            data = await resp.json()
+    
+    return redirect('dashboard')
 
 
 

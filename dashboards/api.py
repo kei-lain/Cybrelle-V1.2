@@ -23,27 +23,30 @@ from django.core.serializers import serialize
 from .schema import HostSchema , CVESchema, NotFoundSchema , ReportSchema, Error
 import dotenv, os
 import asyncio
+from django.contrib.auth.decorators import login_required
+from ninja.openapi.views import openapi_json
 from ninja.security import APIKeyHeader, django_auth
 
 dotenv.load_dotenv(".env")
 apiKey = os.getenv('API_KEY')
-api = NinjaAPI(csrf=True)
+api = NinjaAPI(openapi_url=None)
 
 
-class ApiKey(APIKeyHeader):
-    param_name = "X-API-Key"
+# class ApiKey(APIKeyHeader):
+#     param_name = "X-API-Key"
 
-    def authenticate(self, request, key):
-        if key == os.getenv('Cybrelle_API_KEY'):
-            return key
+#     def authenticate(self, request, key):
+#         if key == os.getenv('Cybrelle_API_KEY'):
+#             return key
 
 
-header_key = ApiKey()
+# header_key = ApiKey()
 
 
 stripe.api_key = settings.STRIPE_LIVE_SECRET_KEY
 
-@api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema}, auth=header_key)
+@login_required
+@api.get("hosts/{host_id}", response={200: HostSchema, 404: NotFoundSchema})
 def host(request, host_id: int):
     try:
         host = Host.objects.get(pk=host_id)
@@ -52,7 +55,7 @@ def host(request, host_id: int):
     except Host.DoesNotExist as e:
         return 404, {"message": "Host does not exist"}
 
-@api.post("hosts/", response={201: HostSchema}, auth=header_key)
+@api.post("hosts/", response={201: HostSchema})
 def create_host(request, host: HostSchema):
     host = Host.objects.create(**host.dict())
     return host
@@ -60,8 +63,8 @@ def create_host(request, host: HostSchema):
 def cves(request):
     return  CVE.objects.all()
 
-
-@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error}, auth=django_auth)
+@login_required
+@api.api_operation(["POST","GET"], "cves/{host_id}", response={codes_2xx:  CVESchema ,201: ReportSchema, 500: Error})
 async def cves(request,host_id: int):
     threads = []
     sections = []
@@ -130,8 +133,8 @@ async def cves(request,host_id: int):
    
     return 201, new_cve, 
 
-
-@api.get("reports/{host_id}", response={200: ReportSchema}, auth=header_key)
+@login_required
+@api.get("reports/{host_id}", response={200: ReportSchema})
 def reports(request, host_id: int):
     host = Host.objects.get(pk=host_id)
     reports = Report.objects.all().filter(host=host)
