@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+Thank you for registering on Cybrelle.io! Please click the following link to activate your account:
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+Thanks,
+The Cybrelle.io Team
+{% endautoescape %}

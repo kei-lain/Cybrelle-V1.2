@@ -27,7 +27,7 @@ load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1', 'cybrelle.io', '146.190.14.147','146.190.13.233','*' ,'localhost', '0.0.0.0']
 
 
@@ -163,7 +163,7 @@ DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = False
+# SECURE_SSL_REDIRECT = False
 
 # SECURE_HSTS_SECONDS = 31536000 # 1 year
 # SECURE_HSTS_PRELOAD = True
