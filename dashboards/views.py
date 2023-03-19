@@ -155,7 +155,7 @@ class CVEView(LoginRequiredMixin, DetailView):
 
 async def getVulnerabilities(request, host_id):
     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-        async with session.post(f"http://127.0.0.1:8080/api/cves/{host_id}") as resp:
+        async with session.post(f"https://cybrelle.io/api/cves/{host_id}") as resp:
             data = await resp.json()
     
     return redirect('dashboard')
