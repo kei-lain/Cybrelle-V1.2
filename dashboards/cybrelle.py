@@ -260,7 +260,7 @@ async def reportGen(address,username,password):
         if 'choices' in response:
             completed_text = response['choices'][0]['text']
 
-        else:
+        else: 
             completed_text = response
         report[config] = (f' - {completed_text} \n')
     return(report)

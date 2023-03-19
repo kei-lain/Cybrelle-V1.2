@@ -17,10 +17,11 @@ def getVulnerabilities(self, request, host_id):
     Celery task to retrieve vulnerabilities for a given host ID asynchronously
     """
     try:
-        with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-            async with session.post(f"https://127.0.0.1/api/cves/{host_id}") as resp:
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+            async with session.post(f"https://cybrelle.io/api/cves/{host_id}") as resp:
                 data = await resp.json()
-            await web.redirect("dashboard")
+    
+        return redirect('dashboard')
     except Exception as e:
         # Retry task up to 3 times in case of failure
         raise self.retry(exc=e, countdown=60, max_retries=3)
