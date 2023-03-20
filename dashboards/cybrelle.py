@@ -60,7 +60,7 @@ async def Scanner(address, username, password):
 
     for process in processes:
         systemInfo.append(process)
-    procVulns = await processVulnerability(processInfo)
+    
     netVulns = await getVulnerability(addressInfo)
     programvulns = await getProgramVulnerability(kernel, systemInfo)
     unitVulns= await systemdScanner(address, username, password)
@@ -68,16 +68,6 @@ async def Scanner(address, username, password):
     V = unitVulns + netVulns + programvulns + procVulns
     
     return(list(V)) 
-
-async def processVulnerability(processInfo):
-    processVulns = []
-    for i in range(len(processInfo)):
-        query = (f'{addressInfo[i]}')
-        CVEs = crawler.get_main_page(query)
-        for v in CVEs:
-            ID = CVEs[v]['ID']
-            processVulns.append(ID)
-    return(processVulns)
 
 
 
@@ -220,19 +210,6 @@ async def remoteExecution(address, username, password):
     return(processes, kernel)  
 
 
-async def processExecution(address,username, password):
-    processes = []
-    kernel = ''
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    user= username
-    passwd= password
-    client.connect(address, port=22, username=user, password=passwd)
-    client.connect(address, port=22, username=username, password=password)
-    getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
-    getOS = "uname -r"
-    stdin, stdout, stderr = client.exec_command(getProcesses)
-
 
 
 
@@ -262,7 +239,7 @@ async def reportGen(address,username,password):
 
         else: 
             completed_text = response
-        report[config] = (f' - {completed_text} \n')
+        report[config] = (f' - {completed_text}\n')
     return(report)
 
     
