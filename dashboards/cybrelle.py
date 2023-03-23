@@ -60,7 +60,8 @@ async def Scanner(address, username, password):
 
     for process in processes:
         systemInfo.append(process)
-    
+
+    procVulns = await getProcessVulnerability(processInfo)
     netVulns = await getVulnerability(addressInfo)
     programvulns = await getProgramVulnerability(kernel, systemInfo)
     unitVulns= await systemdScanner(address, username, password)
@@ -149,7 +150,56 @@ async def getProgramVulnerability(kernel,systemInfo):
         #         pass
 
     return(vulns)
-       
+
+async def getProcessVulnerability(processInfo):
+    vulns = []
+    processVulns = {}
+    process = ''
+
+    
+    for i in range(0, len(processInfo)):
+        process = systemInfo[i][0]
+        query = (f'{process}')
+        # print(query)
+    
+    
+        CVEs = crawler.get_main_page(query)
+        for v in CVEs:
+            if query2 in CVEs[v]['DESC']:
+                ID= (CVEs[v]['ID'])
+            
+
+                procVulns.append(ID)
+                print(ID)
+    return(print(procVulns)) 
+
+
+def processExecution(address, username, password):
+    processes = []
+    kernel = ''
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    user= username
+    passwd= password
+    client.connect(address, port=22, username=user, password=passwd)
+    getProcesses = ("ps auxc | awk -v col=11 '{print $col}'" )
+    getOS = "uname -r"
+    stdin, stdout, stderr = client.exec_command(getProcesses)
+
+    p = (line.split("\n") for line in stdout.readlines())
+
+    for eachProcess in p:
+        if 'COMMAND' in eachProcess:
+            continue
+        else:
+            processes.append(eachProcess)
+    stdin,stdout, stderr = client.exec_command(getOS)
+    for kernel in stdout.readlines():
+        kernel = kernel 
+        
+
+    return(processes, kernel)
+
    
 
 async def remoteExecution(address, username, password):
@@ -239,7 +289,7 @@ async def reportGen(address,username,password):
 
         else: 
             completed_text = response
-        report[config] = (f' - {completed_text}\n')
+        report[config] = (f' -{config} ----------------------------------------- {completed_text}\n')
     return(report)
 
     

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.db import transaction
 from djstripe import webhooks
 from .forms import HostForm
+from .tasks import get_Vulnerabilities
 import json
 import requests
 import aiohttp
@@ -130,35 +131,20 @@ class CVEView(LoginRequiredMixin, DetailView):
     context_object_name = 'cve'
     template_name = 'cve-info.html'
 
-# def getVulnerabilities(request, host_id):
-#         response =  requests.post(f"https://cybrelle.io/api/cves/{host_id}")
-#         data = response
-#         while data is not None:
-#             redirect("dashboard")
 
-
-
-
-# def getVulnerabilities(request, host_id):
-#     with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-#         with session.post(f"https://127.0.0.1/api/cves/{host_id}") as resp:
-#             data = resp.json()
-
-#     return data
-
-# def getVulnerabilities(request, host_id):
-   
-#         response =  requests.post(f"http:/0.0.0.0/api/cves/{host_id}")
-#         data = response
-#         while data is not None:
-#             return redirect('dashboard')
+##correct one works previously
 
 async def getVulnerabilities(request, host_id):
     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
-        async with session.post(f"https://cybrelle.io/api/cves/{host_id}") as resp:
+        async with session.post(f"https://127.0.0.1:8080/api/cves/{host_id}") as resp:
             data = await resp.json()
     
     return redirect('dashboard')
+
+# def getVulnerabilities(request):
+#     # host_id = 123 # replace with the actual host ID
+#     result = get_Vulnerabilities.delay()
+#     return redirect('dashboard')
 
 
 

@@ -131,7 +131,7 @@ async def cves(request,host_id: int):
             
     
    
-    return 201, new_cve, 
+    return 201, new_cve
 
 @login_required
 @api.get("reports/{host_id}", response={200: ReportSchema})
