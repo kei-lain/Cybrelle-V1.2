@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.db import transaction
 from djstripe import webhooks
 from .forms import HostForm
-from .tasks import get_Vulnerabilities
 import json
 import requests
 import aiohttp
@@ -135,11 +134,18 @@ class CVEView(LoginRequiredMixin, DetailView):
 ##correct one works previously
 
 async def getVulnerabilities(request, host_id):
-    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=2000)) as session:
+    data = ''
+    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=20000)) as session:
         async with session.post(f"https://127.0.0.1:8080/api/cves/{host_id}") as resp:
-            data = await resp.json()
-    
-    return redirect('dashboard')
+            
+            if resp.content_type == 'text/plain':
+                data = await resp.text()  # retrieve the response as plain text
+                # parse the plain text data as needed
+            else:
+                data = await resp.json()  # assume response content is JSON and parse it accordingly
+            while data is not None:
+            
+                return redirect('dashboard')
 
 # def getVulnerabilities(request):
 #     # host_id = 123 # replace with the actual host ID

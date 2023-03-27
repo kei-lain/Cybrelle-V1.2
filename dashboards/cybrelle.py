@@ -54,19 +54,19 @@ async def Scanner(address, username, password):
     await asyncio.sleep(0)
 
     processes , kernel  = await remoteExecution(address, username, password)
-    procs , kern = await processExecution(address, username, password)
-    for proc in  procs:
-        processInfo.append(proc)
+    # procs , kern = await processExecution(address, username, password)
+    # for proc in  procs:
+    #     processInfo.append(proc)
 
     for process in processes:
         systemInfo.append(process)
 
-    procVulns = await getProcessVulnerability(processInfo)
+    # procVulns = await getProcessVulnerability(processInfo)
     netVulns = await getVulnerability(addressInfo)
     programvulns = await getProgramVulnerability(kernel, systemInfo)
     unitVulns= await systemdScanner(address, username, password)
 
-    V = unitVulns + netVulns + programvulns + procVulns
+    V = unitVulns + netVulns + programvulns 
     
     return(list(V)) 
 

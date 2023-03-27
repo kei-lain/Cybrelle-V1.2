@@ -86,7 +86,6 @@ async def cves(request,host_id: int):
         section = report[key]
         sections.append(section)
 
-    # futures = await asyncio.gather(Scanner(ip_address,host_username, host_password))
     new_report = await sync_to_async(Report.objects.create)(host=host_obj, report=sections) 
     for future in asyncio.as_completed([futures]):
 
@@ -101,6 +100,7 @@ async def cves(request,host_id: int):
                 details = (crawler.get_main_page(result))
                 if len(details) >= 1:
                     detail = details[0]['DESC']
+                    print(detail)
                 else:
                     detail = result
                 
@@ -131,7 +131,7 @@ async def cves(request,host_id: int):
             
     
    
-    return 201, new_cve
+    return 201, new_cve, new_report
 
 @login_required
 @api.get("reports/{host_id}", response={200: ReportSchema})
