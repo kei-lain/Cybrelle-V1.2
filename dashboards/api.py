@@ -108,26 +108,26 @@ async def cves(request,host_id: int):
                 new_cve= await sync_to_async(CVE.objects.create)(host_id=host_obj.id,cves=str(result), info=detail)
             
             except ValidationError as e:
-                print(e)
+                pass
                 
             except ConfigError as e:
-                print(e)
+                pass
                 
 
             except pydantic.ValidationError as e:
-                print(e)
+                pass
                 
 
             except TimeoutError:
-                print(TimeoutError())
+                pass
             except ValueError as e:
-                print(e)
+                pass
             
             
                 # await sync_to_async(new_cve.save())
             except IntegrityError:
             # Handle the integrity error
-                return(print('Error: null value in column "cves"'))
+                pass
             
     
    
