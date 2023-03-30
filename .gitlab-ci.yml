@@ -11,7 +11,7 @@ variables:
   DOCKER_PUSH_ARGS: ""
 
 before_script:
-  - echo 5@AW9sXYfauV(WwRA| | docker login $DOCKER_REGISTRY -u laineytubbs@cybrelle.io --password-stdin
+  - echo $DOCKER_REGISTRY_PASSWORD | docker login $DOCKER_REGISTRY -u laineytubbs@cybrelle.io --password-stdin
 
 build:
   stage: build
