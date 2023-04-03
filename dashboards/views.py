@@ -147,6 +147,20 @@ async def getVulnerabilities(request, host_id):
             
                 return redirect('dashboard')
 
+# async def getVulnerabilities(request, host_id):
+#     data = ''
+#     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=20000)) as session:
+#         async with session.post(f"http://127.0.0.1:8080/api/cves/{host_id}") as resp:
+            
+#             if resp.content_type == 'text/plain':
+#                 data = await resp.text()  # retrieve the response as plain text
+#                 # parse the plain text data as needed
+#             else:
+#                 data = await resp.json()  # assume response content is JSON and parse it accordingly
+#             while data is not None:
+            
+#                 return redirect('dashboard')
+
 # def getVulnerabilities(request):
 #     # host_id = 123 # replace with the actual host ID
 #     result = get_Vulnerabilities.delay()
@@ -162,66 +176,20 @@ class ReportView(LoginRequiredMixin,DetailView):
 
 
 
-        # try:
-        #     messages.success(response, 'Cybrelle has finished running. The page will now reload to show your vulnerabilities')
-        #     return(render(response, 'dashboard-main.html'))
-        # except:
-        #     messages.success(request, "Something went wrong")
-        
-
-# def get_CVES(self) :
-    
-#     for host in Host.objects.count():
-#         response = requests.post(url)(f"http://127.0.0.1:8000/api/cves/{host}")
-#         if response.is_val
-#         print(CVEList)
-#     return CVEList
-    
-    # def get_Solution(self, cve_id):
-    #     response = request.get(f'http://127.0.0.1:8000/api/instructions/{cve_id}')
-    #     Instructions = response
-    #     return(Instructions)
-
-
-        
-        
-
-        
-
-    # def get_vuls(request):
-    #     get_vulns_response = requests.get('127.0.0.1:8001/')
-    #     get_vulns_response = json.loads(get_vulns_response)
-    #     return(render(request,get_vulns_response))
-
-# class OrganizationAdmin(LoginRequiredMixin, ListView):
-#     model = Organization
-#     template_name = 'organization-admin.html'
-
-
 class AccountInfo(DetailView):
     model = User
     template_name = 'accounts-page.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customer = Customer.get_or_create(subscriber=self.request.user)
+        user_subscription = Subscription.objects.filter(customer=customer, status="active")
+        context["user_subscription"] = user_subscription
 
-    # host = Host.objects.get(pk=pk)
-    # user = host.user
-    # obj = get_object_or_404(Host, pk=pk)
-    # organization = obj.organization
-    # ip_address = str(obj.ip_address)
-    # host_username = obj.host_username
-    # host_password = obj.host_password
-    # serializer = CVESerializer(data=request.data)
-    # if serializer.is_valid():
-    #     host = serializer.data.host
-    #     organization = serializer.data.Organization
-    #     user = serializer.data.user
-    #     cves = scan_results
-    #     queryset = CVE.objects.filter(host=host)
-    #     room = queryset[0]
-    #     if queryset.exists():
-    #         cves = scan_results
-    #         room.save(update_fields['cves'])
-    #     else:
+        return context
+
+
+  
 
     
 

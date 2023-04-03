@@ -1,0 +1,10 @@
+{% extends 'dash.html'%}
+{% block title%} Accounts Page {% endblock%}
+{% block content %}
+{% if  user_subscription  or request.user.is_superuser %}
+<h1>Your subscription is active<h1>
+
+{% else %}
+<p><a href="{% url "checkout" %}">Please Check the Status of your Subscription</a></p>
+
+{% endif %}

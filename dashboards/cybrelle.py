@@ -276,20 +276,24 @@ async def reportGen(address,username,password):
         configInfo = stdout.readlines()
         print(configInfo)
 
-
-        prompt = (f'Can you explain if {config} is secure. If not please summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is not important, please skip over.')
+        
+        prompt = (f' Please see if {config} is secure. if it is insecure summarize and generate a report explaining how to fix all the issues:  {configInfo}. If {config} is secure, please skip over.')
         # response = requests.post(api_endpoint, json=payload, headers={"Authorization": f"Bearer {openai.api_key}"})
         # completed_text = response.json()
+        message =  [{"role": "user", "content": f"{prompt}"}]
         try:
-            response = openai.Completion.create(engine = 'text-davinci-003', prompt= prompt , max_tokens = 3000, temperature = 0.5, top_p =1 , frequency_penalty=0, presence_penalty=0)
+            response =openai.ChatCompletion.create(model="gpt-4",
+                                 messages=[
+                                           {"role": "user", "content": prompt}])
         except:
             pass
         if 'choices' in response:
-            completed_text = response['choices'][0]['text']
+            completed_text = response['choices'][0]['message']['content']
+
 
         else: 
             completed_text = response
-        report[config] = (f' -{config} ----------------------------------------- {completed_text}\n')
+        report[config] = (f'\n -{config} ----------------------------------------- {completed_text}')
     return(report)
 
     

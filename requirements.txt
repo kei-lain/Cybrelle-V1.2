@@ -98,7 +98,7 @@ nspektr==0.4.0
 numpy==1.24.1
 nvdlib==0.7.1
 oauthlib==3.1.1
-openai==0.25.0
+openai
 openpyxl==3.0.10
 ordered-set==4.1.0
 packaging==21.3

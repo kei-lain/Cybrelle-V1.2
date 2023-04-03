@@ -1,28 +1,21 @@
-image: docker:20.10
+image: docker:stable
+
+services:
+  - docker:dind
 
 stages:
   - build
   - deploy
 
-variables:
-  DOCKER_REGISTRY: registry.digitalocean.com/cybrelle-registry
-  DOCKER_IMAGE: $DOCKER_REGISTRY/cybrelle-web-web
-  DOCKER_BUILD_ARGS: "--pull"
-  DOCKER_PUSH_ARGS: ""
-
-before_script:
-  - echo $DOCKER_REGISTRY_PASSWORD | docker login $DOCKER_REGISTRY -u laineytubbs@cybrelle.io --password-stdin
-
 build:
   stage: build
   script:
-    - docker build $DOCKER_BUILD_ARGS -t $DOCKER_IMAGE:$CI_COMMIT_SHA .
-    - docker tag $DOCKER_IMAGE:$CI_COMMIT_SHA $DOCKER_IMAGE:latest
-    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA $DOCKER_PUSH_ARGS
-    - docker push $DOCKER_IMAGE:latest $DOCKER_PUSH_ARGS
+    - docker build -t cybrelle-web-web .
+    - docker login registry.digitalocean.com -u laineytubbs@cybrelle.io -p dop_v1_147d0f347ac7a4af3bb8e45858682b10f7230d05c4b39776c8dd508d9bc05491
+    - docker tag cybrelle-web-web registry.digitalocean.com/cybrelle-registry/cybrelle-web-web
+    - docker push registry.digitalocean.com/cybrelle-registry/cybrelle-web-web
 
 deploy:
   stage: deploy
   script:
-    - echo "Deploying Cybrelle"
-    # Add deployment steps here, e.g. pulling the image on production server
+    - echo "Deployment logic goes here"
