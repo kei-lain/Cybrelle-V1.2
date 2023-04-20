@@ -96,9 +96,6 @@ TEMPLATES = [
     },
 ]
 
-# CELERY_RESULT_BACKEND = "default"
-
-# CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061')
 
 
 
