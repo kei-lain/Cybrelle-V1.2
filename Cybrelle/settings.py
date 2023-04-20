@@ -100,8 +100,7 @@ TEMPLATES = [
 
 # CELERY_BROKER_URL = config('CELERY_BROKER_REDIS_URL', default='rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061')
 
-CELERY_BROKER_URL = "rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061"
-CELERY_RESULT_BACKEND = "rediss://default:AVNS_iVcSzA7isfKzUUSOrrp@cybrelle-celery-redis-do-user-13199386-0.b.db.ondigitalocean.com:25061"
+
 
 
 
@@ -119,12 +118,7 @@ DATABASES = {
     )
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'admin@cybrelle.io'
-EMAIL_HOST_PASSWORD = 'dowF8@7i2iGY*x4|h'
+
 #
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
